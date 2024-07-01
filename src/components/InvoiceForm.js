@@ -1,8 +1,9 @@
 // src/components/InvoiceForm.js
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import printInvoice from "./InvoicePrinter";
 
-const InvoiceForm = () => {
+const InvoiceForm = ({ onInvoiceAdded }) => {
   const [formData, setFormData] = useState({
     invoiceNumber: "",
     client: "",
@@ -53,6 +54,10 @@ const InvoiceForm = () => {
       ...prev,
       { ...selectedProduct, quantity: 1 },
     ]);
+    setFormData((prev) => ({
+      ...prev,
+      product: "",
+    }));
   };
 
   const handleQuantityChange = (index, quantity) => {
@@ -78,6 +83,15 @@ const InvoiceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Fetch the authenticated user
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+      console.error("Error fetching user:", userError.message);
+      setMessage(`Error fetching user: ${userError.message}`);
+      return;
+    }
+    const user = userData.user;
+
     // Convert fields to correct types
     const invoiceData = {
       invoiceNumber: formData.invoiceNumber,
@@ -92,6 +106,7 @@ const InvoiceForm = () => {
         price: parseFloat(item.price) || 0,
         tax: parseFloat(item.tax) || 0,
       })),
+      user_id: user.id, // Add user_id field
     };
 
     // Ensure no empty strings are sent for integer fields
@@ -117,6 +132,10 @@ const InvoiceForm = () => {
         customMessage: "",
       });
       setSelectedProducts([]);
+      onInvoiceAdded();
+
+      // Print the invoice
+      printInvoice(invoiceData);
     }
   };
 
@@ -147,8 +166,16 @@ const InvoiceForm = () => {
             <p>Tax: {companyDetails.vat}</p>
           </div>
         )}
-        <select name="product" onChange={handleProductSelect}>
-          <option value="">Select Your Product/Service</option>
+        <select
+          name="product"
+          value={formData.product}
+          onChange={handleProductSelect}
+        >
+          <option value="">
+            {selectedProducts.length === 0
+              ? "Add a Product"
+              : "Add Another Product"}
+          </option>
           {products.map((product) => (
             <option key={product.id} value={product.id}>
               {product.name}

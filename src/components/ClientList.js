@@ -1,24 +1,35 @@
-// src/components/ClientList.js
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
 const ClientList = () => {
   const [clients, setClients] = useState([]);
-  const [selectedClient, setSelectedClient] = useState(null);
+
+  const fetchClients = async () => {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+      console.error("Error fetching user:", userError.message);
+      return;
+    }
+    const user = userData.user;
+    const { data, error } = await supabase
+      .from("clients")
+      .select("*")
+      .eq("user_id", user.id);
+    if (error) {
+      console.error("Error fetching clients:", error.message);
+    } else {
+      setClients(data);
+    }
+  };
 
   useEffect(() => {
-    const fetchClients = async () => {
-      const { data, error } = await supabase.from("clients").select("*");
-      if (error) console.error("Error fetching clients:", error.message);
-      else setClients(data);
-    };
-
     fetchClients();
-  }, []);
+    const interval = setInterval(() => {
+      fetchClients();
+    }, 5000); // Fetch clients every 5 seconds
 
-  const handleClientClick = (client) => {
-    setSelectedClient(client);
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="list-container">
@@ -26,21 +37,9 @@ const ClientList = () => {
         <h2>Your Clients</h2>
         <ul>
           {clients.map((client) => (
-            <li key={client.id} onClick={() => handleClientClick(client)}>
-              {client.name}
-            </li>
+            <li key={client.id}>{client.name}</li>
           ))}
         </ul>
-        {selectedClient && (
-          <div>
-            <h3>Client Details</h3>
-            <p>Name: {selectedClient.name}</p>
-            <p>Address: {selectedClient.address}</p>
-            <p>VAT: {selectedClient.vat}</p>
-            <p>Phone: {selectedClient.phone}</p>
-            <p>Email: {selectedClient.email}</p>
-          </div>
-        )}
       </div>
     </div>
   );

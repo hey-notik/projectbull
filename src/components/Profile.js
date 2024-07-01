@@ -1,4 +1,3 @@
-// src/components/Profile.js
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
@@ -9,6 +8,7 @@ const Profile = () => {
     phone: "",
     address: "",
     vat: "",
+    invoiceTemplate: "template1",
   });
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("profiles")
       .upsert(profile, { returning: "minimal" });
     if (error) {
@@ -86,6 +86,14 @@ const Profile = () => {
           value={profile.vat}
           onChange={handleChange}
         />
+        <select
+          name="invoiceTemplate"
+          value={profile.invoiceTemplate}
+          onChange={handleChange}
+        >
+          <option value="template1">Template 1</option>
+          <option value="template2">Template 2</option>
+        </select>
         <button type="submit">Save Profile</button>
       </form>
     </div>

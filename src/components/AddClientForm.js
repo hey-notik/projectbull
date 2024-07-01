@@ -1,4 +1,3 @@
-// src/components/AddClientForm.js
 import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 
@@ -11,6 +10,7 @@ const AddClientForm = ({ onClientAdded }) => {
     email: "",
   });
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +23,26 @@ const AddClientForm = ({ onClientAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null); // Reset error state
-    const { error } = await supabase.from("clients").insert([formData]);
+    setSuccess(null); // Reset success state
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+      console.error("Error fetching user:", userError.message);
+      setError(`Error fetching user: ${userError.message}`);
+      return;
+    }
+    const user = userData.user;
+    const { error } = await supabase
+      .from("clients")
+      .insert([{ ...formData, user_id: user.id }]);
     if (error) {
       console.error("Error adding client:", error.message);
       setError(`Error adding client: ${error.message}`);
     } else {
       console.log("Client added successfully!");
-      onClientAdded();
+      setSuccess("Client added successfully!");
+      if (typeof onClientAdded === "function") {
+        onClientAdded();
+      }
       setFormData({
         name: "",
         address: "",
@@ -43,6 +56,7 @@ const AddClientForm = ({ onClientAdded }) => {
   return (
     <div className="form-container">
       {error && <div className="error">{error}</div>}
+      {success && <div className="success">{success}</div>}
       <form onSubmit={handleSubmit} className="form">
         <h2>Add a Client</h2>
         <input

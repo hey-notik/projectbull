@@ -1,4 +1,3 @@
-// src/components/AddProductForm.js
 import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
 
@@ -10,6 +9,7 @@ const AddProductForm = ({ onProductAdded }) => {
     tax: "",
   });
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,13 +22,26 @@ const AddProductForm = ({ onProductAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null); // Reset error state
-    const { error } = await supabase.from("products").insert([formData]);
+    setSuccess(null); // Reset success state
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+      console.error("Error fetching user:", userError.message);
+      setError(`Error fetching user: ${userError.message}`);
+      return;
+    }
+    const user = userData.user;
+    const { error } = await supabase
+      .from("products")
+      .insert([{ ...formData, user_id: user.id }]);
     if (error) {
       console.error("Error adding product:", error.message);
       setError(`Error adding product: ${error.message}`);
     } else {
       console.log("Product added successfully!");
-      onProductAdded();
+      setSuccess("Product added successfully!");
+      if (typeof onProductAdded === "function") {
+        onProductAdded();
+      }
       setFormData({
         name: "",
         description: "",
@@ -41,6 +54,7 @@ const AddProductForm = ({ onProductAdded }) => {
   return (
     <div className="form-container">
       {error && <div className="error">{error}</div>}
+      {success && <div className="success">{success}</div>}
       <form onSubmit={handleSubmit} className="form">
         <h2>Add a Product/Service</h2>
         <input

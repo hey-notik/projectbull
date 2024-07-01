@@ -1,0 +1,82 @@
+/* src/components/InvoiceTemplate.css */
+.invoice-container {
+  width: 210mm;
+  height: 297mm;
+  padding: 20mm;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-header img {
+  max-width: 150px;
+}
+
+.invoice-details {
+  text-align: right;
+}
+
+.invoice-details h1 {
+  margin: 0;
+}
+
+.invoice-details p {
+  margin: 0;
+}
+
+.invoice-to {
+  margin-top: 20mm;
+}
+
+.invoice-to h2 {
+  margin: 0;
+}
+
+.invoice-to p {
+  margin: 0;
+}
+
+.invoice-items {
+  width: 100%;
+  margin-top: 20mm;
+  border-collapse: collapse;
+}
+
+.invoice-items th,
+.invoice-items td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.invoice-items th {
+  background: #f2f2f2;
+}
+
+.invoice-summary {
+  text-align: right;
+  margin-top: 20mm;
+}
+
+.invoice-summary table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-summary th,
+.invoice-summary td {
+  padding: 8px;
+}
+
+.invoice-summary th {
+  text-align: left;
+}
+
+.invoice-summary td {
+  text-align: right;
+}

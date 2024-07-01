@@ -1,24 +1,35 @@
-// src/components/ProductList.js
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const fetchProducts = async () => {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+      console.error("Error fetching user:", userError.message);
+      return;
+    }
+    const user = userData.user;
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("user_id", user.id);
+    if (error) {
+      console.error("Error fetching products:", error.message);
+    } else {
+      setProducts(data);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { data, error } = await supabase.from("products").select("*");
-      if (error) console.error("Error fetching products:", error.message);
-      else setProducts(data);
-    };
-
     fetchProducts();
-  }, []);
+    const interval = setInterval(() => {
+      fetchProducts();
+    }, 5000); // Fetch products every 5 seconds
 
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-  };
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="list-container">
@@ -26,20 +37,9 @@ const ProductList = () => {
         <h2>Your Products</h2>
         <ul>
           {products.map((product) => (
-            <li key={product.id} onClick={() => handleProductClick(product)}>
-              {product.name}
-            </li>
+            <li key={product.id}>{product.name}</li>
           ))}
         </ul>
-        {selectedProduct && (
-          <div>
-            <h3>Product Details</h3>
-            <p>Name: {selectedProduct.name}</p>
-            <p>Description: {selectedProduct.description}</p>
-            <p>Price: {selectedProduct.price}</p>
-            <p>Tax: {selectedProduct.tax}</p>
-          </div>
-        )}
       </div>
     </div>
   );
