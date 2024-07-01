@@ -1,0 +1,46 @@
+/* src/components/Dashboard.css */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  padding: 20px;
+}
+
+.invoice-form-container {
+  width: 50%;
+  padding-right: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.invoice-form {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.lists-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.generated-list-container,
+.received-list-container {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.generated-list-container {
+  margin-bottom: 10px;
+}
+
+.received-list-container {
+  margin-top: 10px;
+}
