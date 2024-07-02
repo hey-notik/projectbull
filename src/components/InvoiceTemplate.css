@@ -1,66 +1,67 @@
 /* src/components/InvoiceTemplate.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
 .invoice-container {
-  width: 210mm;
-  height: 297mm;
-  padding: 20mm;
-  margin: auto;
-  background: white;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .invoice-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 20px;
 }
 
-.invoice-header img {
-  max-width: 150px;
+.invoice-header div {
+  width: 48%;
+}
+
+.invoice-header h1 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.invoice-header p {
+  margin: 4px 0;
 }
 
 .invoice-details {
   text-align: right;
 }
 
-.invoice-details h1 {
-  margin: 0;
-}
-
-.invoice-details p {
-  margin: 0;
-}
-
 .invoice-to {
-  margin-top: 20mm;
+  margin-bottom: 20px;
 }
 
 .invoice-to h2 {
-  margin: 0;
+  margin: 0 0 10px;
+  font-size: 20px;
 }
 
-.invoice-to p {
-  margin: 0;
-}
-
-.invoice-items {
+.invoice-items table {
   width: 100%;
-  margin-top: 20mm;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .invoice-items th,
 .invoice-items td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: left;
 }
 
 .invoice-items th {
-  background: #f2f2f2;
-}
-
-.invoice-summary {
-  text-align: right;
-  margin-top: 20mm;
+  background-color: #f9f9f9;
 }
 
 .invoice-summary table {
@@ -71,12 +72,16 @@
 .invoice-summary th,
 .invoice-summary td {
   padding: 8px;
+  text-align: right;
 }
 
 .invoice-summary th {
-  text-align: left;
+  width: 80%;
+  padding-right: 20px;
 }
 
-.invoice-summary td {
-  text-align: right;
+.custom-message {
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
 }
