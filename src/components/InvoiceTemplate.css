@@ -1,41 +1,32 @@
 /* src/components/InvoiceTemplate.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f4f4f4;
-}
-
 .invoice-container {
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
+  font-family: Arial, sans-serif;
+  color: #333;
   padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: white;
 }
 
 .invoice-header {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
-.invoice-header div {
-  width: 48%;
-}
-
-.invoice-header h1 {
-  margin: 0 0 10px;
+.company-info h1,
+.invoice-details h1 {
+  margin: 0;
   font-size: 24px;
 }
 
-.invoice-header p {
-  margin: 4px 0;
-}
-
-.invoice-details {
-  text-align: right;
+.company-info p,
+.invoice-details p {
+  margin: 5px 0;
 }
 
 .invoice-to {
@@ -47,7 +38,11 @@ body {
   font-size: 20px;
 }
 
-.invoice-items table {
+.invoice-to p {
+  margin: 5px 0;
+}
+
+.invoice-items {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
@@ -61,7 +56,15 @@ body {
 }
 
 .invoice-items th {
-  background-color: #f9f9f9;
+  background: #f4f4f4;
+}
+
+.invoice-items tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.invoice-summary {
+  margin-bottom: 20px;
 }
 
 .invoice-summary table {
@@ -71,17 +74,17 @@ body {
 
 .invoice-summary th,
 .invoice-summary td {
+  border: 1px solid #ddd;
   padding: 8px;
   text-align: right;
 }
 
 .invoice-summary th {
-  width: 80%;
-  padding-right: 20px;
+  background: #f4f4f4;
 }
 
 .custom-message {
   text-align: center;
-  padding: 20px 0;
   font-style: italic;
+  padding: 20px 0;
 }

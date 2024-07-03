@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import ClientDetailsOverlay from "./ClientDetailsOverlay";
+import "./Overlay.css";
 
 const ClientList = () => {
   const [clients, setClients] = useState([]);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [overlayOpen, setOverlayOpen] = useState(false);
 
   const fetchClients = async () => {
     const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -31,16 +35,44 @@ const ClientList = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleClientClick = (client) => {
+    setSelectedClient(client);
+    setOverlayOpen(true);
+  };
+
+  const handleCloseOverlay = () => {
+    setOverlayOpen(false);
+    setSelectedClient(null);
+  };
+
+  const handleClientUpdated = () => {
+    fetchClients(); // Refresh the client list
+  };
+
+  const handleClientDeleted = () => {
+    fetchClients(); // Refresh the client list
+  };
+
   return (
     <div className="list-container">
       <div className="list">
         <h2>Your Clients</h2>
         <ul>
           {clients.map((client) => (
-            <li key={client.id}>{client.name}</li>
+            <li key={client.id} onClick={() => handleClientClick(client)}>
+              {client.name}
+            </li>
           ))}
         </ul>
       </div>
+      {selectedClient && (
+        <ClientDetailsOverlay
+          client={selectedClient}
+          onClose={handleCloseOverlay}
+          onUpdate={handleClientUpdated}
+          onDelete={handleClientDeleted}
+        />
+      )}
     </div>
   );
 };

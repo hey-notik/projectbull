@@ -1,7 +1,6 @@
 // src/components/InvoiceForm.js
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-import printInvoice from "./InvoicePrinter";
 
 const InvoiceForm = ({ onInvoiceAdded }) => {
   const [formData, setFormData] = useState({
@@ -133,9 +132,6 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
       });
       setSelectedProducts([]);
       onInvoiceAdded();
-
-      // Print the invoice
-      printInvoice(invoiceData);
     }
   };
 

@@ -1,8 +1,8 @@
-// src/components/Navbar.js
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import "./Navbar.css";
+import logo from "../assets/logo.png"; // Import the logo image
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -18,23 +18,38 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">Invoice App</div>
+      <div className="navbar-brand">
+        <img src={logo} alt="Logo" className="navbar-logo" />{" "}
+        {/* Add the logo */}
+      </div>
       <div className="navbar-links">
-        <NavLink to="/dashboard" className="nav-link" activeClassName="active">
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) => (isActive ? "active" : "nav-link")}
+        >
           Dashboard
         </NavLink>
-        <NavLink to="/clients" className="nav-link" activeClassName="active">
+        <NavLink
+          to="/clients"
+          className={({ isActive }) => (isActive ? "active" : "nav-link")}
+        >
           Clients
         </NavLink>
-        <NavLink to="/products" className="nav-link" activeClassName="active">
+        <NavLink
+          to="/products"
+          className={({ isActive }) => (isActive ? "active" : "nav-link")}
+        >
           Products
         </NavLink>
-        <NavLink to="/profile" className="nav-link" activeClassName="active">
+        <NavLink
+          to="/profile"
+          className={({ isActive }) => (isActive ? "active" : "nav-link")}
+        >
           Profile
         </NavLink>
-        <button className="nav-link sign-out-button" onClick={handleSignOut}>
+        <NavLink to="/login" className="nav-link" onClick={handleSignOut}>
           Sign Out
-        </button>
+        </NavLink>
       </div>
     </nav>
   );

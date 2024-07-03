@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import ProductDetailsOverlay from "./ProductDetailsOverlay";
+import "./Overlay.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [overlayOpen, setOverlayOpen] = useState(false);
 
   const fetchProducts = async () => {
     const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -31,16 +35,44 @@ const ProductList = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    setOverlayOpen(true);
+  };
+
+  const handleCloseOverlay = () => {
+    setOverlayOpen(false);
+    setSelectedProduct(null);
+  };
+
+  const handleProductUpdated = () => {
+    fetchProducts(); // Refresh the product list
+  };
+
+  const handleProductDeleted = () => {
+    fetchProducts(); // Refresh the product list
+  };
+
   return (
     <div className="list-container">
       <div className="list">
         <h2>Your Products</h2>
         <ul>
           {products.map((product) => (
-            <li key={product.id}>{product.name}</li>
+            <li key={product.id} onClick={() => handleProductClick(product)}>
+              {product.name}
+            </li>
           ))}
         </ul>
       </div>
+      {selectedProduct && (
+        <ProductDetailsOverlay
+          product={selectedProduct}
+          onClose={handleCloseOverlay}
+          onUpdate={handleProductUpdated}
+          onDelete={handleProductDeleted}
+        />
+      )}
     </div>
   );
 };

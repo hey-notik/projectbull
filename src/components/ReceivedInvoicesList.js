@@ -1,15 +1,20 @@
+// src/components/ReceivedInvoicesList.js
 import React from "react";
 
-const ReceivedInvoicesList = ({ invoices }) => {
+const ReceivedInvoicesList = ({ invoices, onInvoiceClick }) => {
   return (
-    <div>
-      <ul>
-        {invoices.map((invoice) => (
-          <li key={invoice.id}>
+    <div className="received-invoices-list">
+      {invoices.map((invoice) => (
+        <div
+          key={invoice.id}
+          className="invoice-item"
+          onClick={() => onInvoiceClick(invoice)}
+        >
+          <p>
             Invoice #{invoice.invoiceNumber} - Total: {invoice.total}
-          </li>
-        ))}
-      </ul>
+          </p>
+        </div>
+      ))}
     </div>
   );
 };
