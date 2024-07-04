@@ -243,7 +243,6 @@ const ClientList = () => {
             <textarea
               className="form-control mb-2 mt-1 w-100"
               style={{ height: "150px" }}
-              rows={10}
               type="text"
               name="address"
               placeholder="Enter the registered address of the client"

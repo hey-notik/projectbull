@@ -32,26 +32,29 @@ const ProductList = () => {
   };
 
   return (
-    <div className="container-fluid m-5">
-      <div className="row d-flex flex-row gap-5">
-        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
-          <AddProductForm onProductAdded={handleProductAdded} />
-        </div>
-        <div className="col-6 p-3 border rounded-2" style={{ height: "85vh" }}>
+    <div className="container">
+      <div className="form-container">
+        <AddProductForm onProductAdded={handleProductAdded} />
+      </div>
+      <div className="list-container">
+        <div className="list">
           <h2>Your Products</h2>
-          <ul className="list-unstyled">
+          <ul>
             {products.map((product) => (
-              <li
-                className="p-2"
-                key={product.id}
-                onClick={() => handleProductClick(product)}
-              >
-                <p className="ms-2">{product.name}</p>
-                <hr />
+              <li key={product.id} onClick={() => handleProductClick(product)}>
+                {product.name}
               </li>
             ))}
           </ul>
         </div>
+        {selectedProduct && (
+          <ProductDetailsOverlay
+            product={selectedProduct}
+            onClose={handleCloseOverlay}
+            onUpdate={handleProductUpdated}
+            onDelete={handleProductDeleted}
+          />
+        )}
       </div>
     </div>
   );
