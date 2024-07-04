@@ -32,55 +32,59 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-form-container">
-      <form onSubmit={handleSubmit} className="profile-form">
-        <h2>Your Profile</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          value={formData.phone}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={formData.address}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="vat"
-          placeholder="VAT Number"
-          value={formData.vat}
-          onChange={handleChange}
-        />
-        <select
-          name="invoiceTemplate"
-          value={formData.invoiceTemplate}
-          onChange={handleChange}
-        >
-          <option value="template1">Template 1</option>
-          <option value="template2">Template 2</option>
-          <option value="template3">Template 3</option>
-        </select>
-        <button type="submit">Save Profile</button>
-      </form>
+    <div className="container-fluid m-5">
+      <div className="row">
+        <div className="col-5 border rounded-2 p-2" style={{ height: "80vh" }}>
+          <form onSubmit={handleSubmit} className="form">
+            <h2 className="mb-5">Your Profile</h2>
+            <label className="form-label fw-bold">Name</label>
+            <input
+              className="form-control mb-4 w-100"
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <label className="form-label fw-bold mt-4">
+              Registered Email Address
+            </label>
+            <input
+              className="form-control mb-4 w-100"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <label className="form-label fw-bold mt-4">
+              Registered Phone Number
+            </label>
+            <input
+              className="form-control mb-4 w-100"
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            <label className="form-label fw-bold mt-4">
+              Registered Company Name
+            </label>
+            <input
+              className="form-control mb-4 w-100"
+              type="text"
+              name="company"
+              placeholder="Company"
+              value={formData.company}
+              onChange={handleChange}
+            />
+            <button type="submit" className="btn btn-primary w-100 mt-5">
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
