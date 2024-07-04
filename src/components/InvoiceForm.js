@@ -1,6 +1,6 @@
-// src/components/InvoiceForm.js
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import { useAuth } from "../context/AuthContext";
 
 const InvoiceForm = ({ onInvoiceAdded }) => {
   const [formData, setFormData] = useState({
@@ -15,6 +15,7 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [companyDetails, setCompanyDetails] = useState(null);
   const [message, setMessage] = useState("");
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -82,16 +83,11 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Fetch the authenticated user
-    const { data: userData, error: userError } = await supabase.auth.getUser();
-    if (userError) {
-      console.error("Error fetching user:", userError.message);
-      setMessage(`Error fetching user: ${userError.message}`);
+    if (!user) {
+      setMessage("User not authenticated.");
       return;
     }
-    const user = userData.user;
 
-    // Convert fields to correct types
     const invoiceData = {
       invoiceNumber: formData.invoiceNumber,
       client: parseInt(formData.client, 10) || null,
@@ -105,10 +101,9 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
         price: parseFloat(item.price) || 0,
         tax: parseFloat(item.tax) || 0,
       })),
-      user_id: user.id, // Add user_id field
+      user_id: user.id,
     };
 
-    // Ensure no empty strings are sent for integer fields
     if (!invoiceData.client) {
       setMessage("Client is required.");
       return;
@@ -122,7 +117,6 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
       console.log("Invoice generated successfully!");
       setMessage("Invoice generated successfully!");
 
-      // Reset the form
       setFormData({
         invoiceNumber: "",
         client: "",

@@ -1,28 +1,22 @@
+/* src/components/Navbar.css */
 .navbar {
   display: flex;
-  justify-content: right; /* Center align the logo and links horizontally */
-  align-items: left;
-  padding: 1rem;
-  background-color: #333;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--primary-color);
   color: #fff;
-  position: relative;
-  height: 50px;
-}
-
-.navbar-brand {
-  position: absolute;
-  left: 25px; /* 25px padding from the left */
+  height: 60px;
 }
 
 .navbar-logo {
-  height: 60px; /* Adjust the height as needed */
+  height: 50px;
 }
 
 .navbar-links {
   display: flex;
   gap: 1rem;
-  padding-top: 10px;
-  padding-right: 10px;
+  padding-right: 75px;
 }
 
 .nav-link {
@@ -32,12 +26,36 @@
 
 .nav-link.active {
   font-weight: bold;
-  text-decoration: underline;
 }
 
-.sign-out-button {
-  background: none;
-  border: none;
-  color: #fff;
+.sign-out-link {
   cursor: pointer;
+}
+
+.toggle-theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 25px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.toggle-theme-btn .icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #000;
+  transition: transform 0.3s;
+}
+
+body.light .toggle-theme-btn .icon {
+  transform: translateX(0);
+}
+
+body.dark .toggle-theme-btn .icon {
+  transform: translateX(25px);
 }

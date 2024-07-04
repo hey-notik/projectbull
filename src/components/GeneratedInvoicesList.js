@@ -3,8 +3,6 @@ import InvoiceDetails from "./InvoiceDetails";
 
 const GeneratedInvoicesList = ({
   invoices,
-  clients,
-  products,
   onInvoiceUpdated,
   onInvoiceMarkedAsReceived,
   onInvoiceDeleted,
@@ -34,8 +32,6 @@ const GeneratedInvoicesList = ({
       {overlayOpen && selectedInvoice && (
         <InvoiceDetails
           invoice={selectedInvoice}
-          clients={clients}
-          products={products}
           isOpen={overlayOpen}
           onClose={handleCloseOverlay}
           onUpdate={onInvoiceUpdated}

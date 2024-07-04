@@ -60,7 +60,9 @@ const ClientDetailsOverlay = ({ client, onClose, onUpdate, onDelete }) => {
       }
     } catch (err) {
       console.error("Error deleting client:", err.message);
-      setError(`Error deleting client: ${err.message}`);
+      setError(
+        `Error deleting client: there are one or more invoices associated with this client. Please delete them or reassign them and then come back to delete this client.`
+      );
     }
   };
 

@@ -1,4 +1,4 @@
-/* Styles for InvoiceDetails Component */
+/* src/components/InvoiceDetails.css */
 .invoice-details-overlay {
   position: fixed;
   top: 0;
@@ -13,6 +13,7 @@
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .invoice-details-overlay.open {
@@ -20,29 +21,21 @@
   pointer-events: auto;
 }
 
-.invoice-details-overlay.close {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .invoice-details-content {
   background: white;
   padding: 20px;
   border-radius: 8px 0 0 8px;
   position: relative;
-  max-width: 600px; /* Increased width for better real estate */
+  max-width: 600px;
   width: 100%;
   height: 100%;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
 }
 
 .invoice-details-overlay.open .invoice-details-content {
   transform: translateX(0);
-}
-
-.invoice-details-overlay.close .invoice-details-content {
-  transform: translateX(100%);
 }
 
 .close-button {
@@ -65,7 +58,7 @@
 .company-details,
 .products {
   margin-bottom: 20px;
-  flex: 1; /* Make details containers flexible */
+  flex: 1;
 }
 
 .client-details h3,
@@ -127,248 +120,6 @@ button:hover {
 textarea,
 input[type="number"],
 select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-textarea {
-  height: 100px;
-}
-
-/* Styles for ReceivedInvoiceDetails Component */
-.received-invoice-details-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.received-invoice-details-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.received-invoice-details-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  width: 100%;
-  height: 90%;
-  overflow-y: auto;
-  position: relative;
-}
-
-.received-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  padding: 10px;
-}
-
-.details-section {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.details-column {
-  width: 45%;
-}
-
-.grand-total {
-  margin-top: 20px;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-table th {
-  background-color: #f2f2f2;
-}
-
-table thead {
-  background-color: #f9f9f9;
-}
-
-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-table tbody tr:hover {
-  background-color: #f1f1f1;
-}
-
-.grand-total h3 {
-  margin: 5px 0;
-}
-
-button {
-  background-color: #4caf50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-.overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  z-index: 1000;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.overlay-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px 0 0 8px;
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-  height: 100%;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-  transform: translateX(100%);
-}
-
-.overlay.open .overlay-content {
-  transform: translateX(0);
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  padding: 10px;
-  border: none;
-  background: transparent;
-}
-
-.details-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.client-details,
-.company-details,
-.products {
-  margin-bottom: 20px;
-  flex: 1; /* Make details containers flexible */
-}
-
-.client-details h3,
-.company-details h3,
-.products h3 {
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.client-details p,
-.company-details p,
-.products p,
-.products table {
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.products table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.products table th,
-.products table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.products table th {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-.products table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.grand-total {
-  text-align: right;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-textarea,
-input[type="number"],
-select,
-input[type="text"],
-input[type="email"] {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;

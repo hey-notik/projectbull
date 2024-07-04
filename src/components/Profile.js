@@ -1,35 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../supabaseClient"; // Add this line to import supabase
+import { useProfile } from "../context/ProfileContext";
 
 const Profile = () => {
-  const [profile, setProfile] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    vat: "",
-    invoiceTemplate: "template1",
-  });
+  const { profile, refreshProfile } = useProfile();
+  const [formData, setFormData] = useState(profile);
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .single();
-      if (error) {
-        console.error("Error fetching profile:", error.message);
-      } else if (data) {
-        setProfile(data);
-      }
-    };
-
-    fetchProfile();
-  }, []);
+    setFormData(profile);
+  }, [profile]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile((prevProfile) => ({
+    setFormData((prevProfile) => ({
       ...prevProfile,
       [name]: value,
     }));
@@ -39,11 +22,12 @@ const Profile = () => {
     e.preventDefault();
     const { error } = await supabase
       .from("profiles")
-      .upsert(profile, { returning: "minimal" });
+      .upsert(formData, { returning: "minimal" });
     if (error) {
       console.error("Error saving profile:", error.message);
     } else {
       console.log("Profile saved successfully!");
+      refreshProfile();
     }
   };
 
@@ -55,40 +39,40 @@ const Profile = () => {
           type="text"
           name="name"
           placeholder="Name"
-          value={profile.name}
+          value={formData.name}
           onChange={handleChange}
         />
         <input
           type="email"
           name="email"
           placeholder="Email"
-          value={profile.email}
+          value={formData.email}
           onChange={handleChange}
         />
         <input
           type="text"
           name="phone"
           placeholder="Phone Number"
-          value={profile.phone}
+          value={formData.phone}
           onChange={handleChange}
         />
         <input
           type="text"
           name="address"
           placeholder="Address"
-          value={profile.address}
+          value={formData.address}
           onChange={handleChange}
         />
         <input
           type="text"
           name="vat"
           placeholder="VAT Number"
-          value={profile.vat}
+          value={formData.vat}
           onChange={handleChange}
         />
         <select
           name="invoiceTemplate"
-          value={profile.invoiceTemplate}
+          value={formData.invoiceTemplate}
           onChange={handleChange}
         >
           <option value="template1">Template 1</option>

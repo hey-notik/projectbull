@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../supabaseClient";
+import "./Form.css"; // Import the CSS
 
 const AddClientForm = ({ onClientAdded }) => {
   const [formData, setFormData] = useState({
@@ -9,8 +10,8 @@ const AddClientForm = ({ onClientAdded }) => {
     phone: "",
     email: "",
   });
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,14 +21,30 @@ const AddClientForm = ({ onClientAdded }) => {
     }));
   };
 
+  const validateForm = () => {
+    if (!formData.name || !formData.address || !formData.vat) {
+      setMessage("Name, Address, and VAT Number are required fields.");
+      setMessageType("error");
+      setTimeout(() => {
+        setMessage(null);
+        setMessageType(null);
+      }, 3000); // Hide message after 3 seconds
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Reset error state
-    setSuccess(null); // Reset success state
+    if (!validateForm()) return;
+
+    setMessage(null);
+    setMessageType(null);
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError) {
       console.error("Error fetching user:", userError.message);
-      setError(`Error fetching user: ${userError.message}`);
+      setMessage(`Error fetching user: ${userError.message}`);
+      setMessageType("error");
       return;
     }
     const user = userData.user;
@@ -36,10 +53,12 @@ const AddClientForm = ({ onClientAdded }) => {
       .insert([{ ...formData, user_id: user.id }]);
     if (error) {
       console.error("Error adding client:", error.message);
-      setError(`Error adding client: ${error.message}`);
+      setMessage(`Error adding client: ${error.message}`);
+      setMessageType("error");
     } else {
       console.log("Client added successfully!");
-      setSuccess("Client added successfully!");
+      setMessage("Client added successfully!");
+      setMessageType("success");
       if (typeof onClientAdded === "function") {
         onClientAdded();
       }
@@ -50,13 +69,16 @@ const AddClientForm = ({ onClientAdded }) => {
         phone: "",
         email: "",
       });
+      setTimeout(() => {
+        setMessage(null);
+        setMessageType(null);
+      }, 3000); // Hide message after 3 seconds
     }
   };
 
   return (
     <div className="form-container">
-      {error && <div className="error">{error}</div>}
-      {success && <div className="success">{success}</div>}
+      {message && <div className={`message ${messageType}`}>{message}</div>}
       <form onSubmit={handleSubmit} className="form">
         <h2>Add a Client</h2>
         <input

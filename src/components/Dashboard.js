@@ -1,4 +1,3 @@
-// src/components/Dashboard.js
 import React, { useState, useEffect } from "react";
 import InvoiceForm from "./InvoiceForm";
 import GeneratedInvoicesList from "./GeneratedInvoicesList";
@@ -7,6 +6,7 @@ import Overlay from "./Overlay";
 import InvoiceDetails from "./InvoiceDetails";
 import ReceivedInvoiceDetails from "./ReceivedInvoiceDetails";
 import { supabase } from "../supabaseClient";
+import { useAuth } from "../context/AuthContext";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -14,16 +14,11 @@ const Dashboard = () => {
   const [receivedInvoices, setReceivedInvoices] = useState([]);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [overlayOpen, setOverlayOpen] = useState(false);
-  const [isGenerated, setIsGenerated] = useState(true); // Track whether the selected invoice is generated or received
+  const [isGenerated, setIsGenerated] = useState(true);
+  const { user } = useAuth();
 
   const fetchInvoices = async () => {
-    const { data: userData, error: userError } = await supabase.auth.getUser();
-    if (userError) {
-      console.error("Error fetching user:", userError.message);
-      return;
-    }
-    const user = userData.user;
-    console.log("Fetching all invoices for user:", user.id);
+    if (!user) return;
     const { data, error } = await supabase
       .from("invoices")
       .select("*")
@@ -31,7 +26,6 @@ const Dashboard = () => {
     if (error) {
       console.error("Error fetching invoices:", error.message);
     } else {
-      console.log("Fetched invoices:", data);
       const generated = data.filter((invoice) => invoice.type !== "received");
       const received = data.filter((invoice) => invoice.type === "received");
       setGeneratedInvoices(generated);
@@ -41,27 +35,22 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchInvoices();
-    const invoiceInterval = setInterval(() => {
-      fetchInvoices();
-    }, 5000); // Fetch invoices every 5 seconds
-
-    return () => clearInterval(invoiceInterval);
-  }, []);
+  }, [user]);
 
   const handleInvoiceAdded = () => {
-    fetchInvoices(); // Refresh the invoice list
+    fetchInvoices();
   };
 
   const handleInvoiceUpdated = () => {
-    fetchInvoices(); // Refresh the invoice list
+    fetchInvoices();
   };
 
   const handleInvoiceMarkedAsReceived = () => {
-    fetchInvoices(); // Refresh the invoice list
+    fetchInvoices();
   };
 
   const handleInvoiceDeleted = () => {
-    fetchInvoices(); // Refresh the invoice list
+    fetchInvoices();
   };
 
   const handleInvoiceClick = (invoice, isGenerated) => {
@@ -88,14 +77,14 @@ const Dashboard = () => {
             onInvoiceUpdated={handleInvoiceUpdated}
             onInvoiceMarkedAsReceived={handleInvoiceMarkedAsReceived}
             onInvoiceDeleted={handleInvoiceDeleted}
-            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, true)} // Handle invoice click
+            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, true)}
           />
         </div>
         <div className="received-list-container">
           <h2>Received Invoices</h2>
           <ReceivedInvoicesList
             invoices={receivedInvoices}
-            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)} // Handle invoice click
+            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)}
           />
         </div>
       </div>
