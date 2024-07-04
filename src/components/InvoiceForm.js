@@ -232,7 +232,7 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
           value={formData.customMessage}
           onChange={handleChange}
         />
-        <button type="submit" className="mt-2 rounded-2">
+        <button type="submit" className="mt-2 rounded-2 w-100">
           Generate
         </button>
       </form>
