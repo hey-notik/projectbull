@@ -219,69 +219,92 @@ const ClientList = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        {message && <div className={`message ${messageType}`}>{message}</div>}
-        <form onSubmit={handleSubmit} className="form">
-          <h2>Add a Client</h2>
-          <input
-            type="text"
-            name="name"
-            placeholder="Client Name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="vat"
-            placeholder="VAT Number"
-            value={formData.vat}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <button type="submit">Add Client</button>
-        </form>
-      </div>
-      <div className="client-list-container">
-        <h2>Your Clients</h2>
-        <ul className="client-list">
-          {clients.map((client, index) => (
-            <li
-              key={client.id}
-              className="client-list-item"
-              onClick={() => handleClientClick(client)}
-            >
-              <div
-                className="client-avatar"
-                style={{ backgroundColor: getPastelColor(index) }}
-              ></div>
-              <div className="client-details">
-                <span className="client-name">{client.name}</span>
-                <span className="client-email">{client.email}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+    <div className="container-fluid m-5">
+      <div className="row d-flex flex-row gap-5">
+        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
+          {message && <div className={`message ${messageType}`}>{message}</div>}
+          <form onSubmit={handleSubmit} className="form">
+            <h2 className="mb-0">Add a Client</h2>
+            <p className="text-secondary mt-2 mb-4">
+              Add all the details of your client!
+            </p>
+            <label className="form-label fw-bold">Registered Name</label>
+            <input
+              className="form-control mb-2 mt-1 w-100"
+              type="text"
+              name="name"
+              placeholder="Client Name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <label className="form-label fw-bold mt-2">
+              Registered Address
+            </label>
+            <textarea
+              className="form-control mb-2 mt-1 w-100"
+              style={{ height: "150px" }}
+              rows={10}
+              type="text"
+              name="address"
+              placeholder="Enter the registered address of the client"
+              value={formData.address}
+              onChange={handleChange}
+            ></textarea>
+            <label className="form-label fw-bold mt-2">VAT Number</label>
+            <input
+              className="form-control w-100"
+              type="text"
+              name="vat"
+              placeholder="VAT Number"
+              value={formData.vat}
+              onChange={handleChange}
+            />
+            <label className="form-label fw-bold mt-2">
+              Registered Phone Number
+            </label>
+            <input
+              className="form-control w-100"
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            <label className="form-label fw-bold mt-2">Email Address</label>
+            <input
+              className="form-control w-100 mt-1 mb-4"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <button type="submit" className="rounded-2 w-100">
+              Add Client
+            </button>
+          </form>
+        </div>
+        <div className="col-6 p-3 border rounded-2" style={{ height: "85vh" }}>
+          <h2>Your Clients</h2>
+          <ul className="client-list">
+            {clients.map((client, index) => (
+              <li
+                key={client.id}
+                className="client-list-item"
+                onClick={() => handleClientClick(client)}
+              >
+                <div
+                  className="client-avatar"
+                  style={{ backgroundColor: getPastelColor(index) }}
+                ></div>
+                <div className="client-details">
+                  <span className="client-name">{client.name}</span>
+                  <span className="client-email">{client.email}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       {overlayOpen && selectedClient && (
         <div className={`overlay ${overlayOpen ? "open" : ""}`}>
