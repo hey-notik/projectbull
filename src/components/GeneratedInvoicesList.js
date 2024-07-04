@@ -22,7 +22,7 @@ const GeneratedInvoicesList = ({
   };
 
   return (
-    <div>
+    <div style={{ height: "34vh", overflowY: "scroll" }} className="pb-3">
       <ul className="list-unstyled">
         {invoices.map((invoice) => (
           <li key={invoice.id} onClick={() => handleInvoiceClick(invoice)}>

@@ -66,21 +66,21 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container-fluid mx-2 my-2">
+    <div className="container-fluid mb-2 mt-4 my-2">
       <div className="row">
         <div className="col-md-6">
           <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
         </div>
         <div className="col-md-6">
           <div className="row">
-            <div className="col-md-12 border rounded-2 p-4 mx-2">
-              <h2>Generated Invoices</h2>
+            <div className="col-md-12 border rounded-2 p-4 mx-2 mb-2">
+              <h2 className="mb-2">Generated Invoices</h2>
               <GeneratedInvoicesList
                 invoices={generatedInvoices}
                 onInvoiceClick={handleInvoiceClick}
               />
             </div>
-            <div className="col-md-12 border rounded-2 my-2 mx-2 p-4">
+            <div className="col-md-12 border rounded-2 mt-2 mx-2 p-4">
               <h2>Received Invoices</h2>
               <ReceivedInvoicesList
                 invoices={receivedInvoices}

@@ -133,16 +133,22 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
   return (
     <div className="border rounded-2">
       <form onSubmit={handleSubmit} className="invoice-form">
-        <h2>Generate an Invoice!</h2>
-        {message && <p>{message}</p>}
+        <h2 className="mb-4">Generate an Invoice!</h2>
+        {message && <p className="mb-2">{message}</p>}
         <input
+          className="rounded-2 p-2 w-100 mb-4"
           type="text"
           name="invoiceNumber"
           placeholder="Invoice Number"
           value={formData.invoiceNumber}
           onChange={handleChange}
         />
-        <select name="client" value={formData.client} onChange={handleChange}>
+        <select
+          className="form-select mb-4"
+          name="client"
+          value={formData.client}
+          onChange={handleChange}
+        >
           <option value="">Select Your Client</option>
           {clients.map((client) => (
             <option key={client.id} value={client.id}>
@@ -151,13 +157,14 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
           ))}
         </select>
         {companyDetails && (
-          <div className="company-details">
+          <div className="mb-4">
             <p>{companyDetails.name}</p>
             <p>{companyDetails.address}</p>
             <p>Tax: {companyDetails.vat}</p>
           </div>
         )}
         <select
+          className="form-select mb-4"
           name="product"
           value={formData.product}
           onChange={handleProductSelect}
@@ -173,40 +180,50 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
             </option>
           ))}
         </select>
-        <table>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Rate</th>
-              <th>Tax</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {selectedProducts.map((product, index) => (
-              <tr key={index}>
-                <td>{product.name}</td>
-                <td>
-                  <input
-                    type="number"
-                    value={product.quantity}
-                    min="1"
-                    onChange={(e) =>
-                      handleQuantityChange(index, e.target.value)
-                    }
-                  />
-                </td>
-                <td>{product.price}</td>
-                <td>{product.tax}</td>
-                <td>
-                  {calculateTotal(product.price, product.quantity, product.tax)}
-                </td>
+        <div
+          style={{ height: "21vh" }}
+          className="mb-4 overflow-scroll rounded-2"
+        >
+          <table className="table">
+            <thead>
+              <tr>
+                <th className="p-2">Product</th>
+                <th className="p-2">Quantity</th>
+                <th className="p-2">Rate</th>
+                <th className="p-2">Tax</th>
+                <th className="p-2">Total</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="grand-total">
+            </thead>
+            <tbody>
+              {selectedProducts.map((product, index) => (
+                <tr key={index}>
+                  <td className="p-2">{product.name}</td>
+                  <td className="p-2">
+                    <input
+                      className="form-control form-control-sm"
+                      type="number"
+                      value={product.quantity}
+                      min="1"
+                      onChange={(e) =>
+                        handleQuantityChange(index, e.target.value)
+                      }
+                    />
+                  </td>
+                  <td className="p-2">{product.price}</td>
+                  <td className="p-2">{product.tax}</td>
+                  <td className="p-2">
+                    {calculateTotal(
+                      product.price,
+                      product.quantity,
+                      product.tax
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="text-end mb-2">
           <h3>Grand Total: {grandTotal}</h3>
         </div>
         <textarea
@@ -215,7 +232,9 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
           value={formData.customMessage}
           onChange={handleChange}
         />
-        <button type="submit">Generate</button>
+        <button type="submit" className="mt-2 rounded-2">
+          Generate
+        </button>
       </form>
     </div>
   );
