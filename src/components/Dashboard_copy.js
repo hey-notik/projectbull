@@ -67,46 +67,45 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid mx-2 my-2">
-      <div className="row">
-        <div className="col-md-6">
-          <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
+      <div className="invoice-form-container">
+        <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
+      </div>
+      <div className="lists-container">
+        <div className="generated-list-container">
+          <h2>Generated Invoices</h2>
+          <GeneratedInvoicesList
+            invoices={generatedInvoices}
+            onInvoiceUpdated={handleInvoiceUpdated}
+            onInvoiceMarkedAsReceived={handleInvoiceMarkedAsReceived}
+            onInvoiceDeleted={handleInvoiceDeleted}
+            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, true)}
+          />
         </div>
-        <div className="col-md-6">
-          <div className="row">
-            <div className="col-md-12 border rounded-2 p-4 mx-2">
-              <h2>Generated Invoices</h2>
-              <GeneratedInvoicesList
-                invoices={generatedInvoices}
-                onInvoiceClick={handleInvoiceClick}
-              />
-            </div>
-            <div className="col-md-12 border rounded-2 my-2 mx-2 p-4">
-              <h2>Received Invoices</h2>
-              <ReceivedInvoicesList
-                invoices={receivedInvoices}
-                onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)}
-              />
-            </div>
-          </div>
-          <Overlay isOpen={overlayOpen} onClose={handleCloseOverlay}>
-            {selectedInvoice && isGenerated ? (
-              <InvoiceDetails
-                invoice={selectedInvoice}
-                onClose={handleCloseOverlay}
-                onUpdate={handleInvoiceUpdated}
-                onMarkAsReceived={handleInvoiceMarkedAsReceived}
-                onDelete={handleInvoiceDeleted}
-              />
-            ) : (
-              <ReceivedInvoiceDetails
-                invoice={selectedInvoice}
-                onClose={handleCloseOverlay}
-                onDelete={handleInvoiceDeleted}
-              />
-            )}
-          </Overlay>
+        <div className="received-list-container">
+          <h2>Received Invoices</h2>
+          <ReceivedInvoicesList
+            invoices={receivedInvoices}
+            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)}
+          />
         </div>
       </div>
+      <Overlay isOpen={overlayOpen} onClose={handleCloseOverlay}>
+        {selectedInvoice && isGenerated ? (
+          <InvoiceDetails
+            invoice={selectedInvoice}
+            onClose={handleCloseOverlay}
+            onUpdate={handleInvoiceUpdated}
+            onMarkAsReceived={handleInvoiceMarkedAsReceived}
+            onDelete={handleInvoiceDeleted}
+          />
+        ) : (
+          <ReceivedInvoiceDetails
+            invoice={selectedInvoice}
+            onClose={handleCloseOverlay}
+            onDelete={handleInvoiceDeleted}
+          />
+        )}
+      </Overlay>
     </div>
   );
 };

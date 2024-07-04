@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import { useAuth } from "../context/AuthContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const InvoiceForm = ({ onInvoiceAdded }) => {
   const [formData, setFormData] = useState({
@@ -130,7 +131,7 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
   };
 
   return (
-    <div className="invoice-form-container">
+    <div className="border rounded-2">
       <form onSubmit={handleSubmit} className="invoice-form">
         <h2>Generate an Invoice!</h2>
         {message && <p>{message}</p>}

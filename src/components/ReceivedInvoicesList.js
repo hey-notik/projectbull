@@ -1,5 +1,6 @@
 // src/components/ReceivedInvoicesList.js
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ReceivedInvoicesList = ({ invoices, onInvoiceClick }) => {
   return (
@@ -10,9 +11,11 @@ const ReceivedInvoicesList = ({ invoices, onInvoiceClick }) => {
           className="invoice-item"
           onClick={() => onInvoiceClick(invoice)}
         >
-          <p>
-            Invoice #{invoice.invoiceNumber} - Total: {invoice.total}
-          </p>
+          <div className="d-flex flex-col justify-content-between p-2">
+            <div>Invoice #{invoice.invoiceNumber}</div>
+            <div>Total: {invoice.total}</div>
+          </div>
+          <hr />
         </div>
       ))}
     </div>

@@ -1,8 +1,11 @@
 /* src/components/Dashboard.css */
+@import url(../styles.css);
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
   padding: 20px;
   background-color: var(--background-color-light);
 }
@@ -26,4 +29,8 @@
 .generated-list-container,
 .received-list-container {
   margin-top: 20px;
+}
+
+.paddingRemove {
+  padding: 0;
 }

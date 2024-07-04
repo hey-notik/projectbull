@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InvoiceDetails from "./InvoiceDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const GeneratedInvoicesList = ({
   invoices,
@@ -22,10 +23,14 @@ const GeneratedInvoicesList = ({
 
   return (
     <div>
-      <ul>
+      <ul className="list-unstyled">
         {invoices.map((invoice) => (
           <li key={invoice.id} onClick={() => handleInvoiceClick(invoice)}>
-            Invoice #{invoice.invoiceNumber} - Total: {invoice.total}
+            <div className="d-flex flex-col justify-content-between p-2">
+              <div>Invoice #{invoice.invoiceNumber}</div>
+              <div>Total: {invoice.total}</div>
+            </div>
+            <hr />
           </li>
         ))}
       </ul>
