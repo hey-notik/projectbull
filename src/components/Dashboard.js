@@ -81,7 +81,7 @@ const Dashboard = () => {
               />
             </div>
             <div className="col-md-12 border rounded-2 mt-2 mx-2 p-4">
-              <h2>Received Invoices</h2>
+              <h2 className="mb-2">Received Invoices</h2>
               <ReceivedInvoicesList
                 invoices={receivedInvoices}
                 onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)}

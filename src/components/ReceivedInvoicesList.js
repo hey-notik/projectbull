@@ -4,7 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const ReceivedInvoicesList = ({ invoices, onInvoiceClick }) => {
   return (
-    <div className="received-invoices-list pb-3" style={{ height: "34vh" }}>
+    <div
+      className="received-invoices-list pb-3"
+      style={{ height: "32vh", overflow: "scroll" }}
+    >
       {invoices.map((invoice) => (
         <div
           key={invoice.id}

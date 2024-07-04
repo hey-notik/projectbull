@@ -131,8 +131,8 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
   };
 
   return (
-    <div className="border rounded-2">
-      <form onSubmit={handleSubmit} className="invoice-form">
+    <div className="border rounded-2 p-3">
+      <form onSubmit={handleSubmit}>
         <h2 className="mb-4">Generate an Invoice!</h2>
         {message && <p className="mb-2">{message}</p>}
         <input
