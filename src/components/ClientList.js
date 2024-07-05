@@ -29,6 +29,13 @@ const ClientList = () => {
     phone: "",
     email: "",
   });
+  const [overlayFormData, setOverlayFormData] = useState({
+    name: "",
+    address: "",
+    vat: "",
+    phone: "",
+    email: "",
+  });
   const [selectedClient, setSelectedClient] = useState(null);
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -61,6 +68,14 @@ const ClientList = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleOverlayChange = (e) => {
+    const { name, value } = e.target;
+    setOverlayFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -121,19 +136,19 @@ const ClientList = () => {
 
   const handleClientClick = (client) => {
     setSelectedClient(client);
+    setOverlayFormData({
+      name: client.name,
+      email: client.email,
+      phone: client.phone,
+      address: client.address,
+      vat: client.vat,
+    });
     setOverlayOpen(true);
     setIsEditing(false);
   };
 
   const handleEditClick = () => {
     setIsEditing(true);
-    setFormData({
-      name: selectedClient.name,
-      email: selectedClient.email,
-      phone: selectedClient.phone,
-      address: selectedClient.address,
-      vat: selectedClient.vat,
-    });
   };
 
   const handleDeleteClick = async () => {
@@ -184,12 +199,10 @@ const ClientList = () => {
   };
 
   const handleSaveClick = async () => {
-    if (!validateForm()) return;
-
     try {
       const updatedClient = {
         ...selectedClient,
-        ...formData,
+        ...overlayFormData,
       };
 
       const { error } = await supabase
@@ -300,40 +313,40 @@ const ClientList = () => {
                   type="text"
                   name="name"
                   placeholder="Name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  value={overlayFormData.name}
+                  onChange={handleOverlayChange}
                 />
                 <label>Email</label>
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={overlayFormData.email}
+                  onChange={handleOverlayChange}
                 />
                 <label>Phone</label>
                 <input
                   type="text"
                   name="phone"
                   placeholder="Phone"
-                  value={formData.phone}
-                  onChange={handleChange}
+                  value={overlayFormData.phone}
+                  onChange={handleOverlayChange}
                 />
                 <label>Address</label>
                 <input
                   type="text"
                   name="address"
                   placeholder="Address"
-                  value={formData.address}
-                  onChange={handleChange}
+                  value={overlayFormData.address}
+                  onChange={handleOverlayChange}
                 />
                 <label>VAT Number</label>
                 <input
                   type="text"
                   name="vat"
                   placeholder="VAT Number"
-                  value={formData.vat}
-                  onChange={handleChange}
+                  value={overlayFormData.vat}
+                  onChange={handleOverlayChange}
                 />
                 <button onClick={handleSaveClick}>Save</button>
               </>

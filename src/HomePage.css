@@ -1,0 +1,222 @@
+/* src/HomePage.css */
+body {
+  margin: 0;
+  font-family: "General Sans", sans-serif;
+  background-color: #181818;
+  color: #f5f5f5;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.header {
+  background: rgba(0, 0, 0, 0.6); /* Black tint */
+  backdrop-filter: blur(10px);
+  padding: 20px 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #007bff;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons .btn {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-buttons .btn:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.auth-buttons .btn-signup {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.auth-buttons .btn-signup:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.hero {
+  padding: 50px 50px 100px; /* Adjust padding to account for fixed header */
+  text-align: center;
+  background: linear-gradient(135deg, #1d2a5b 0%, #181818 100%);
+  margin-bottom: 40px;
+  animation: fadeIn 2s ease-in;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.hero h1 {
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: 1;
+  max-width: 680px;
+  margin: 0;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1.5;
+  margin: 1.5rem 0 2rem;
+  max-width: 680px;
+  margin: 0;
+  text-align: center;
+}
+
+.hero .email-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-bottom: 15px;
+}
+
+.hero input[type="email"] {
+  padding: 7px;
+  font-size: 16px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  width: 300px;
+  background-color: #000;
+  color: #fff;
+}
+
+.hero button {
+  padding: 15px 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #0056b3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.hero button:hover {
+  background-color: #003f8a;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 50px;
+  background-color: #202020;
+}
+
+.feature {
+  width: 30%;
+  text-align: left;
+  animation: slideIn 2s ease-in;
+}
+
+.feature h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 16px;
+  color: #bbb;
+}
+
+footer {
+  background-color: #202020;
+  color: #bbb;
+  text-align: center;
+  padding: 20px 50px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

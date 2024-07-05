@@ -16,6 +16,8 @@ import Dashboard from "./components/Dashboard";
 import Layout from "./components/Layout";
 import { useTheme } from "./ThemeContext";
 import "./styles.css";
+import HomePage from "./HomePage";
+import "./HomePage.css"; // Ensure the CSS is applied
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -32,7 +34,8 @@ const App = () => {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<HomePage />} />{" "}
+              {/* Redirect to HomePage */}
               <Route
                 path="/dashboard"
                 element={
