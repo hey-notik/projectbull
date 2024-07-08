@@ -1,3 +1,4 @@
+// src/components/InvoiceDetails.js
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import printInvoice from "./InvoicePrinter";
@@ -7,9 +8,9 @@ const InvoiceDetails = ({
   invoice,
   isOpen,
   onClose,
-  onUpdate = () => {}, // Default to a no-op function
-  onMarkAsReceived = () => {}, // Default to a no-op function
-  onDelete = () => {}, // Default to a no-op function
+  onUpdate,
+  onMarkAsReceived,
+  onDelete,
 }) => {
   const [formData, setFormData] = useState({
     client: invoice.client,
@@ -21,13 +22,10 @@ const InvoiceDetails = ({
   const [clientDetails, setClientDetails] = useState({});
   const [companyDetails, setCompanyDetails] = useState({});
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [total, setTotal] = useState(invoice.total);
 
   useEffect(() => {
-    if (!invoice) return;
-
     const fetchClients = async () => {
       const { data } = await supabase.from("clients").select("*");
       setClients(data);
@@ -104,32 +102,6 @@ const InvoiceDetails = ({
     setTotal(newTotal.toFixed(2));
   };
 
-  const handleRemoveProduct = (index) => {
-    const updatedItems = formData.items.filter((_, i) => i !== index);
-    setFormData((prev) => ({
-      ...prev,
-      items: updatedItems,
-    }));
-    updateTotal(updatedItems);
-  };
-
-  const handleAddProduct = (e) => {
-    const selectedProduct = products.find(
-      (product) => product.id === parseInt(e.target.value)
-    );
-    setFormData((prev) => ({
-      ...prev,
-      items: [
-        ...prev.items,
-        { ...selectedProduct, quantity: 1, tax: selectedProduct.tax || 0 },
-      ],
-    }));
-    updateTotal([
-      ...formData.items,
-      { ...selectedProduct, quantity: 1, tax: selectedProduct.tax || 0 },
-    ]);
-  };
-
   const handleSave = async () => {
     try {
       const updatedInvoice = {
@@ -146,8 +118,7 @@ const InvoiceDetails = ({
       if (error) {
         throw new Error(error.message);
       } else {
-        setSuccess("Invoice updated successfully!");
-        onUpdate(updatedInvoice); // Pass the updated invoice to onUpdate
+        onUpdate();
         onClose();
       }
     } catch (err) {
@@ -166,7 +137,6 @@ const InvoiceDetails = ({
       if (error) {
         throw new Error(error.message);
       } else {
-        setSuccess("Invoice marked as received!");
         onMarkAsReceived();
         onClose();
       }
@@ -186,7 +156,6 @@ const InvoiceDetails = ({
       if (error) {
         throw new Error(error.message);
       } else {
-        setSuccess("Invoice deleted successfully!");
         onDelete();
         onClose();
       }
@@ -205,6 +174,8 @@ const InvoiceDetails = ({
       customMessage: formData.customMessage,
     };
 
+    console.log("Invoice Data to Print: ", invoiceData); // Debug log
+
     printInvoice(invoiceData);
   };
 
@@ -215,10 +186,6 @@ const InvoiceDetails = ({
     return priceNum * quantityNum + priceNum * quantityNum * (taxNum / 100);
   };
 
-  if (!invoice) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className={`overlay ${isOpen ? "open" : ""}`}>
       <div className="overlay-content">
@@ -226,7 +193,6 @@ const InvoiceDetails = ({
           &times;
         </span>
         {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
         {isEditing ? (
           <>
             <div className="client-details">
@@ -254,7 +220,6 @@ const InvoiceDetails = ({
                     <th>Rate</th>
                     <th>Tax</th>
                     <th>Total</th>
-                    <th></th> {/* Empty header for remove button */}
                   </tr>
                 </thead>
                 <tbody>
@@ -306,27 +271,14 @@ const InvoiceDetails = ({
                           product.tax
                         ).toFixed(2)}
                       </td>
-                      <td>
-                        <button onClick={() => handleRemoveProduct(index)}>
-                          &times;
-                        </button>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <select onChange={handleAddProduct} value="">
-                <option value="">Add Product</option>
-                {products.map((product) => (
-                  <option key={product.id} value={product.id}>
-                    {product.name}
-                  </option>
-                ))}
-              </select>
             </div>
             <textarea
               name="customMessage"
-              placeholder="Enter a custom message to be printed in your invoice."
+              placeholder="Enter a custom Message to be printed in your invoice."
               value={formData.customMessage}
               onChange={handleChange}
             />
@@ -387,12 +339,10 @@ const InvoiceDetails = ({
             </div>
             <p>Custom Message: {invoice.customMessage}</p>
             <p>Total: {invoice.total}</p>
-            <div className="button-container">
-              <button onClick={() => setIsEditing(true)}>Edit</button>
-              <button onClick={handleMarkAsReceived}>Mark as Received</button>
-              <button onClick={handlePrint}>Print</button>
-              <button onClick={handleDelete}>Delete</button>
-            </div>
+            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <button onClick={handleMarkAsReceived}>Mark as Received</button>
+            <button onClick={handlePrint}>Print</button>
+            <button onClick={handleDelete}>Delete</button>
           </>
         )}
       </div>
