@@ -1,0 +1,92 @@
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+  --breeew-accent: 235 73% 62%;
+  --breeew-accent-foreground: 0 0% 100%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --primary: 222.2 47.4% 0%;
+  --primary-foreground: 210 40% 100%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --accent: 235 73% 62%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 215 20.2% 65.1%;
+  --radius: 0.5rem;
+  --font-general-sans: "General Sans", sans-serif;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-general-sans);
+  margin: 0;
+  line-height: 1.5;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --muted: 223 47% 11%;
+  --muted-foreground: 0 0% 70%;
+  --popover: 224 71% 4%;
+  --popover-foreground: 215 20.2% 65.1%;
+  --breeew-accent: 235 73% 62%;
+  --breeew-accent-foreground: 0 0% 100%;
+  --border: 0 0% 20%;
+  --input: 0 0% 18%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 0%;
+  --secondary: 222.2 47.4% 11.2%;
+  --secondary-foreground: 210 40% 98%;
+  --accent: 235 73% 62%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 63% 71%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 216 34% 17%;
+  --radius: 0.5rem;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  border: 0 solid #e5e7eb;
+}
+
+.block {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.font-sans {
+  font-family: var(--font-general-sans);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.max-w- {
+  max-width: 680px;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}

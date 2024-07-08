@@ -8,6 +8,15 @@
   width: 100vw;
   padding: 20px;
   background-color: var(--background-color-light);
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.dashboard-container h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
 }
 
 .invoice-form-container,
@@ -24,6 +33,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   overflow-y: auto;
+  font-size: small;
+  font-weight: 100;
 }
 
 .generated-list-container,
@@ -33,4 +44,8 @@
 
 .paddingRemove {
   padding: 0;
+}
+
+.card-border {
+  border: 0.5px solid var(#333);
 }

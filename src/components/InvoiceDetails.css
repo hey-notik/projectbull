@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px); /* Apply blur to background */
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -22,16 +22,18 @@
 }
 
 .invoice-details-content {
-  background: white;
+  background: #111111; /* Dark background color */
+  color: #f5f5f5; /* Light text color */
   padding: 20px;
   border-radius: 8px 0 0 8px;
   position: relative;
-  max-width: 600px;
+  max-width: 600px; /* Increased width for better real estate */
   width: 100%;
   height: 100%;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
+  overflow-y: auto; /* Make the overlay scrollable */
 }
 
 .invoice-details-overlay.open .invoice-details-content {
@@ -47,6 +49,7 @@
   padding: 10px;
   border: none;
   background: transparent;
+  color: #f5f5f5;
 }
 
 .details-container {
@@ -58,14 +61,14 @@
 .company-details,
 .products {
   margin-bottom: 20px;
-  flex: 1;
+  flex: 1; /* Make details containers flexible */
 }
 
 .client-details h3,
 .company-details h3,
 .products h3 {
   margin-bottom: 10px;
-  color: #333;
+  color: #03dac6;
 }
 
 .client-details p,
@@ -73,7 +76,7 @@
 .products p,
 .products table {
   margin-bottom: 10px;
-  color: #555;
+  color: #f5f5f5;
 }
 
 .products table {
@@ -89,44 +92,275 @@
 }
 
 .products table th {
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #333333;
+  color: #f5f5f5;
 }
 
 .products table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #222222;
 }
 
 .grand-total {
   text-align: right;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: bold;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 textarea,
 input[type="number"],
-select {
+select,
+input[type="text"],
+input[type="email"] {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #444444;
   border-radius: 4px;
+  background-color: #222222; /* Dark background for inputs */
+  color: #f5f5f5; /* Light text color for inputs */
 }
 
 textarea {
   height: 100px;
+}
+
+/* Additional styles for ReceivedInvoiceDetails Component */
+.received-invoice-details-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  backdrop-filter: blur(10px); /* Apply blur to background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.received-invoice-details-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.received-invoice-details-content {
+  background: #111111; /* Dark background color */
+  color: #f5f5f5; /* Light text color */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  height: 90%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.received-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  background: transparent;
+  color: #f5f5f5;
+}
+
+.details-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.details-column {
+  width: 45%;
+}
+
+.grand-total {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #333333;
+  color: #f5f5f5;
+}
+
+table thead {
+  background-color: #222222;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #222222;
+}
+
+table tbody tr:hover {
+  background-color: #333333;
+}
+
+.grand-total h3 {
+  margin: 5px 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  backdrop-filter: blur(10px); /* Apply blur to background */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  padding-top: 55px;
+}
+
+.overlay-content {
+  background: #111111; /* Dark background color */
+  color: #f5f5f5; /* Light text color */
+  padding: 20px;
+  border-radius: 8px 0 0 8px;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto; /* Make the overlay scrollable */
+}
+
+.overlay.open .overlay-content {
+  transform: translateX(0);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: #f5f5f5;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.client-details,
+.company-details,
+.products {
+  margin-bottom: 20px;
+  flex: 1; /* Make details containers flexible */
+}
+
+.client-details h3,
+.company-details h3,
+.products h3 {
+  margin-bottom: 10px;
+  color: #03dac6;
+}
+
+.client-details p,
+.company-details p,
+.products p,
+.products table {
+  margin-bottom: 10px;
+  color: #f5f5f5;
+}
+
+.products table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products table th,
+.products table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.products table th {
+  background-color: #333333;
+  color: #f5f5f5;
+}
+
+.products table tr:nth-child(even) {
+  background-color: #222222;
+}
+
+.grand-total {
+  text-align: right;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+textarea,
+input[type="number"],
+select,
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  background-color: #222222; /* Dark background for inputs */
+  color: #f5f5f5; /* Light text color for inputs */
+}
+
+textarea {
+  height: 100px;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+}
+
+button {
+  background-color: #03dac6;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+button:hover {
+  background-color: #03a996;
 }

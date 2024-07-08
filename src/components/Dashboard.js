@@ -66,7 +66,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container-fluid mb-2 mt-4 my-2">
+    <div className="container mb-2 mt-4 my-2">
       <div className="row">
         <div className="col-md-6">
           <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />

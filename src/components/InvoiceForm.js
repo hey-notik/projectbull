@@ -69,6 +69,10 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
     );
   };
 
+  const handleRemoveProduct = (index) => {
+    setSelectedProducts((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
   const calculateTotal = (price, quantity, tax) => {
     const priceNum = parseFloat(price) || 0;
     const quantityNum = parseInt(quantity, 10) || 0;
@@ -159,9 +163,11 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
         </select>
         {companyDetails && (
           <div className="mb-4">
-            <p>{companyDetails.name}</p>
-            <p>{companyDetails.address}</p>
-            <p>Tax: {companyDetails.vat}</p>
+            <p className="fw-semibold">{companyDetails.name}</p>
+            <p className="fw-light text-wrap" style={{ width: "250px" }}>
+              {companyDetails.address}
+            </p>
+            <p className="fw-light">Tax: {companyDetails.vat}</p>
           </div>
         )}
         <select
@@ -218,6 +224,15 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
                       product.quantity,
                       product.tax
                     )}
+                  </td>
+                  <td className="p-2">
+                    <span
+                      className="text-danger"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleRemoveProduct(index)}
+                    >
+                      &times;
+                    </span>
                   </td>
                 </tr>
               ))}

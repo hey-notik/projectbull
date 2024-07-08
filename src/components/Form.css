@@ -1,12 +1,12 @@
 /* src/components/Form.css */
-@import url("https://fonts.googleapis.com/css2?family=General+Sans:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=General+Sans:wght@200;400;600&display=swap");
 
 body {
   font-family: "General Sans", sans-serif;
 }
 
 .form-container {
-  width: calc(50% - 10px);
+  width: calc(50% - 20px);
   padding: 20px;
 }
 

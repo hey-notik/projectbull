@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
@@ -16,6 +15,7 @@ import Dashboard from "./components/Dashboard";
 import Layout from "./components/Layout";
 import { useTheme } from "./ThemeContext";
 import "./styles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -32,7 +32,6 @@ const App = () => {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/" element={<Login />} />
               <Route
                 path="/dashboard"
                 element={

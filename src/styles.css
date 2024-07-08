@@ -1,101 +1,77 @@
-/* Link to Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap");
-
-/* Define variables for light and dark themes */
-:root {
-  --background-color-light: #f8f9fa;
-  --text-color-light: #343a40;
-  --navbar-color-light: #007bff;
-
-  --background-color-dark: #111111;
-  --text-color-dark: #f8f9fa;
-  --navbar-color-dark: #333333;
-}
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
 
 body {
+  font-family: "General-sans", sans-serif;
+  background-color: #111111; /* Dark mode background color */
+  color: #f5f5f5; /* Light text color for dark mode */
   margin: 0;
-  font-family: "Poppins", "Raleway", sans-serif;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-body.light {
-  background-color: var(--background-color-light);
-  color: var(--text-color-light);
-}
-
-body.dark {
-  background-color: var(--background-color-dark);
-  color: var(--text-color-dark);
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .navbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  height: 60px;
-  width: 100%;
-  position: relative;
-}
-
-body.light .navbar {
-  background-color: var(--navbar-color-light);
-  color: var(--text-color-light);
-}
-
-body.dark .navbar {
-  background-color: var(--navbar-color-dark);
-  color: var(--text-color-dark);
-}
-
-.navbar-logo {
-  height: 40px;
-  margin-right: auto;
-  margin-left: 25px;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 1rem;
+  background-color: #333333; /* Dark mode navbar background color */
+  color: #f5f5f5; /* Light text color for navbar */
 }
 
 .nav-link {
-  color: inherit;
+  color: #f5f5f5;
   text-decoration: none;
 }
 
 .nav-link.active {
-  font-weight: 600; /* Medium font weight */
+  font-weight: 500; /* Medium font weight for active link */
   text-decoration: none; /* Remove underline */
 }
 
-.toggle-theme-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 25px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 25px;
+.border {
+  border: 1px solid #444444; /* Border color for dark mode */
+}
+
+.rounded-2 {
+  border-radius: 8px;
+}
+
+.p-2,
+.p-3,
+.p-4 {
+  padding: 0.5rem;
+}
+
+.table {
+  background-color: #222222; /* Dark mode table background color */
+  color: #f5f5f5; /* Light text color for table */
+}
+
+.table th,
+.table td {
+  border: 1px solid #444444; /* Dark mode border color for table */
+}
+
+textarea,
+input[type="number"],
+input[type="text"],
+input[type="email"],
+select {
+  background-color: #222222; /* Dark mode input background color */
+  color: #f5f5f5; /* Light text color for input */
+  border: 1px solid #444444; /* Dark mode border color for input */
+}
+
+button {
+  background-color: #333333; /* Dark mode button background color */
+  color: #f5f5f5; /* Light text color for button */
+  border: 1px solid #444444; /* Dark mode border color for button */
   cursor: pointer;
-  margin-left: 20px;
+  transition: background-color 0.3s ease;
 }
 
-.toggle-theme-btn .icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #000;
-  transition: transform 0.3s;
+button:hover {
+  background-color: #555555; /* Dark mode button hover color */
 }
 
-body.light .toggle-theme-btn .icon {
-  transform: translateX(0);
-  background-color: #000;
-}
-
-body.dark .toggle-theme-btn .icon {
-  transform: translateX(25px);
-  background-color: #fff;
+::placeholder {
+  font-family: "Merriweather", serif; /* Slab serif font for placeholders */
+  font-weight: 300;
+  font-size: small;
 }
