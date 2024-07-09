@@ -65,12 +65,12 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mb-2 mt-5 my-2">
+    <div className="container-md mb-2 mt-5 my-2">
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-6">
           <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
         </div>
-        <div className="col-md-6">
+        <div className="col-6">
           <div className="row">
             <div className="col-md-12 border rounded-2 p-4 mx-2 mb-2">
               <h2 className="mb-2">Generated Invoices</h2>
@@ -90,13 +90,11 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          (
           <ReceivedInvoiceDetails
             invoice={selectedInvoice}
             onClose={handleCloseOverlay}
             onDelete={handleInvoiceDeleted}
           />
-          )
         </div>
       </div>
     </div>

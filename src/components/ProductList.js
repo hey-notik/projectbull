@@ -36,10 +36,13 @@ const ProductList = () => {
   return (
     <div className="container-fluid m-5">
       <div className="row d-flex flex-row gap-5">
-        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
+        <div
+          className="col-5 p-3 ms-5 mb-5 border rounded-2"
+          style={{ height: "auto" }}
+        >
           <AddProductForm onProductAdded={handleProductAdded} />
         </div>
-        <div className="col-6 p-3 border rounded-2" style={{ height: "85vh" }}>
+        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
           <h2>Your Products</h2>
           <ul className="list-unstyled">
             {products.map((product) => (
@@ -47,6 +50,7 @@ const ProductList = () => {
                 className="p-2"
                 key={product.id}
                 onClick={() => handleProductClick(product)}
+                style={{ cursor: "pointer" }}
               >
                 <p className="ms-2">{product.name}</p>
                 <hr />

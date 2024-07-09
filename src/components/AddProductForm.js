@@ -80,28 +80,34 @@ const AddProductForm = ({ onProductAdded }) => {
           value={formData.description}
           onChange={handleChange}
         />
-        <label className="form-label fw-bold mt-3">
-          Price of Product/Service
-        </label>
-        <input
-          className="form-control mb-3 w-100"
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={formData.price}
-          onChange={handleChange}
-        />
-        <label className="form-label fw-bold mt-3">
-          GST/VAT/Tax Information (%)
-        </label>
-        <input
-          className="form-control mb-3 w-100"
-          type="number"
-          name="tax"
-          placeholder="Tax (%)"
-          value={formData.tax}
-          onChange={handleChange}
-        />
+        <div className="row">
+          <div className="col-6">
+            <label className="form-label fw-bold mt-3">
+              Price of Product/Service
+            </label>
+            <input
+              className="form-control mb-3 w-100"
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-6">
+            <label className="form-label fw-bold mt-3">
+              GST/VAT/Tax Information (%)
+            </label>
+            <input
+              className="form-control mb-3 w-100"
+              type="number"
+              name="tax"
+              placeholder="Tax (%)"
+              value={formData.tax}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
         <button type="submit" className="rounded-2 mt-5 w-100">
           Add Product
         </button>

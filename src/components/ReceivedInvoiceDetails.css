@@ -81,7 +81,7 @@
 }
 
 /* Table Styles */
-table {
+/* table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
@@ -105,7 +105,7 @@ table tr:nth-child(even) {
 
 table tbody tr:hover {
   background-color: #333333;
-}
+} */
 
 /* Grand Total */
 .grand-total {

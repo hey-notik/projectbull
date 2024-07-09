@@ -7,9 +7,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
 }
@@ -43,17 +41,17 @@ body {
   padding: 0.5rem;
 }
 
-.table {
-  background-color: #222222; /* Dark mode table background color */
-  color: #f5f5f5; /* Light text color for table */
+/* .table {
+  background-color: #222222; 
+  color: #f5f5f5; 
   border-radius: 5px;
 }
 
 .table th,
 .table td {
-  border: 1px solid #444444; /* Dark mode border color for table */
+  border: 1px solid #444444; 
   border-radius: 5px;
-}
+} */
 
 textarea,
 input[type="number"],

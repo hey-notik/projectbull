@@ -61,10 +61,10 @@ const Profile = () => {
 
   return (
     <div className="container-fluid m-5">
-      <div className="row justify-content-center">
+      <div className="row">
         <div
           className="col-md-6 col-lg-5 border rounded-2 p-4"
-          style={{ height: "80vh" }}
+          style={{ height: "auto", width: "50%" }}
         >
           <form onSubmit={handleSubmit} className="form">
             <h2 className="mb-5">Your Profile</h2>

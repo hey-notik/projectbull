@@ -92,14 +92,13 @@
 .client-details p,
 .company-details p,
 .products p,
-.products table,
 .details-column p {
   margin-bottom: 10px;
   color: #f5f5f5;
 }
 
 /* Table Styles */
-.products table,
+/* .products table,
 table {
   width: 100%;
   border-collapse: collapse;
@@ -128,7 +127,7 @@ table tbody tr:nth-child(even) {
 
 table tbody tr:hover {
   background-color: #333333;
-}
+} */
 
 /* Input Styles */
 textarea,

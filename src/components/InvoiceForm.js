@@ -191,7 +191,7 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
           style={{ height: "21vh" }}
           className="mb-4 overflow-scroll rounded-2"
         >
-          <table className="table">
+          <table className="table table-dark">
             <thead>
               <tr>
                 <th className="p-2">Product</th>
@@ -199,6 +199,7 @@ const InvoiceForm = ({ onInvoiceAdded }) => {
                 <th className="p-2">Rate</th>
                 <th className="p-2">Tax</th>
                 <th className="p-2">Total</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

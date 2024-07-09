@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import printInvoice from "./InvoicePrinter";
 import "./InvoiceDetails.css";
+import "./Form.css"; // Import the CSS for form styles
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const InvoiceDetails = ({
   invoice,
@@ -186,6 +188,146 @@ const InvoiceDetails = ({
     return priceNum * quantityNum + priceNum * quantityNum * (taxNum / 100);
   };
 
+  const avatarUrls = [
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_10.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_11.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_12.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_13.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_14.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_15.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_16.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_17.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_18.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_19.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_20.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_21.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_22.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_23.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_24.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_25.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_26.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_27.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_10.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_10.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_11.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_12.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_13.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_14.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_15.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_16.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_17.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_18.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_19.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_20.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_21.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_22.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_23.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_24.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_25.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_26.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_27.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_28.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_29.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_30.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_31.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_32.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_33.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_35.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_10.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_11.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_12.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_13.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_14.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_15.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_10.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_1.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_2.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_3.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_4.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_5.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_6.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_7.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_8.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_9.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_10.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_11.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_12.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_13.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_14.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_15.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_16.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_17.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_18.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_19.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_20.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_21.png",
+    "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_22.png",
+  ];
+
+  const getAvatar = (index) => {
+    return avatarUrls[index % avatarUrls.length];
+  };
+
   return (
     <div className={`overlay ${isOpen ? "open" : ""}`}>
       <div className="overlay-content">
@@ -196,7 +338,7 @@ const InvoiceDetails = ({
         {isEditing ? (
           <>
             <div className="client-details">
-              <h3>Client Details</h3>
+              <p>Client Details</p>
               <select
                 name="client"
                 value={formData.client}
@@ -211,8 +353,8 @@ const InvoiceDetails = ({
               </select>
             </div>
             <div className="products">
-              <h3>Products</h3>
-              <table>
+              <p>Products</p>
+              <table className="table table-dark">
                 <thead>
                   <tr>
                     <th>Product</th>
@@ -283,32 +425,60 @@ const InvoiceDetails = ({
               onChange={handleChange}
             />
             <div className="grand-total">
-              <h3>Grand Total: {total}</h3>
+              <p>Grand Total: {total}</p>
             </div>
             <button onClick={handleSave}>Save</button>
           </>
         ) : (
           <>
             <div className="details-container">
-              <div className="client-details">
-                <h3>Client Details</h3>
-                <p>Name: {clientDetails.name}</p>
-                <p>Address: {clientDetails.address}</p>
-                <p>Phone: {clientDetails.phone}</p>
-                <p>Email: {clientDetails.email}</p>
+              <div className="client-details me-2">
+                <p>Client Details</p>
+                <div>
+                  <div className="d-flex flex-col mb-3">
+                    <img src={getAvatar(2)} className="client-avatar mt-2" />
+                    <div className="ps-3">
+                      <span className="client-name d-block">
+                        {clientDetails.name}
+                      </span>
+                      <span className="client-email">
+                        {clientDetails.email}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <p style={{ fontSize: "0.9rem" }}>
+                  Address: {clientDetails.address}
+                </p>
+                <p style={{ fontSize: "0.9rem" }}>
+                  Phone: {clientDetails.phone}
+                </p>
+                <p style={{ fontSize: "0.9rem" }}>VAT: {clientDetails.vat}</p>
               </div>
               <div className="company-details">
-                <h3>Company Details</h3>
-                <p>Name: {companyDetails.name}</p>
-                <p>Address: {companyDetails.address}</p>
-                <p>Phone: {companyDetails.phone}</p>
-                <p>Email: {companyDetails.email}</p>
-                <p>VAT: {companyDetails.vat}</p>
+                <p>Company Details</p>
+                <div className="d-flex flex-col mb-3">
+                  <img src={getAvatar(4)} className="client-avatar mt-2" />
+                  <div className="ps-3">
+                    <span className="client-name d-block">
+                      {companyDetails.name}
+                    </span>
+                    <span className="client-email">{companyDetails.email}</span>
+                  </div>
+                </div>
+                <p style={{ fontSize: "0.9rem" }}>
+                  Address: {companyDetails.address}
+                </p>
+                <p style={{ fontSize: "0.9rem" }}>
+                  Phone: {companyDetails.phone}
+                </p>
+                <p style={{ fontSize: "0.9rem" }}>VAT: {companyDetails.vat}</p>
               </div>
             </div>
             <div className="products">
-              <h3>Products</h3>
-              <table>
+              <p>Products</p>
+              <table className="table table-dark">
                 <thead>
                   <tr>
                     <th>Product</th>
@@ -320,7 +490,7 @@ const InvoiceDetails = ({
                 </thead>
                 <tbody>
                   {invoice.items.map((product, index) => (
-                    <tr key={index}>
+                    <tr key={index} style={{ fontSize: "0.9rem" }}>
                       <td>{product.name}</td>
                       <td>{product.quantity}</td>
                       <td>{product.price}</td>

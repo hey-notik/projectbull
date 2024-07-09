@@ -50,7 +50,3 @@
 .card-border {
   border: 0.5px solid var(--border-color);
 }
-
-.mt-5 {
-  margin-top: 18rem !important; /* Override with !important to ensure it takes precedence */
-}

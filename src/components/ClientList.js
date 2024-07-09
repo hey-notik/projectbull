@@ -4,21 +4,144 @@ import "./Form.css"; // Import the CSS for form styles
 import "./Overlay.css"; // Import the CSS for overlay styles
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const pastelColors = [
-  "#FFB3BA",
-  "#FFDFBA",
-  "#FFFFBA",
-  "#BAFFC9",
-  "#BAE1FF",
-  "#D4A5A5",
-  "#E1E1E1",
-  "#D6C2C2",
-  "#C2D6C2",
-  "#C2C2D6",
+const avatarUrls = [
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_10.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_11.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_12.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_13.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_14.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_15.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_16.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_17.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_18.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_19.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_20.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_21.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_22.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_23.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_24.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_25.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_26.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/vibrent_27.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/3d_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/bluey_10.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_10.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_11.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_12.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_13.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_14.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_15.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_16.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_17.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_18.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_19.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_20.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_21.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_22.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_23.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_24.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_25.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_26.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_27.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_28.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_29.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_30.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_31.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_32.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_33.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_34.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/memo_35.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_10.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_11.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_12.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_13.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_14.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/notion_15.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/teams_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/toon_10.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_1.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_2.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_3.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_4.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_5.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_6.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_7.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_8.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_9.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_10.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_11.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_12.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_13.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_14.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_15.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_16.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_17.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_18.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_19.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_20.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_21.png",
+  "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_22.png",
 ];
 
-const getPastelColor = (index) => {
-  return pastelColors[index % pastelColors.length];
+const getAvatar = (index) => {
+  return avatarUrls[index % avatarUrls.length];
 };
 
 const ClientList = () => {
@@ -222,7 +345,10 @@ const ClientList = () => {
   return (
     <div className="container-fluid m-5">
       <div className="row d-flex flex-row gap-5">
-        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
+        <div
+          className="col-5 p-3 ms-5 mb-5 border rounded-2"
+          style={{ height: "auto" }}
+        >
           {message && <div className={`message ${messageType}`}>{message}</div>}
           <form onSubmit={handleSubmit} className="form">
             <h2 className="mb-0">Add a Client</h2>
@@ -284,20 +410,21 @@ const ClientList = () => {
             </button>
           </form>
         </div>
-        <div className="col-6 p-3 border rounded-2" style={{ height: "85vh" }}>
+        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
           <h2>Your Clients</h2>
           <ul className="client-list">
             {clients.map((client, index) => (
               <li
                 key={client.id}
-                className="client-list-item"
+                className="client-list-item d-flex flex-col align-items-center"
                 onClick={() => handleClientClick(client)}
               >
-                <div
+                {/* <div
                   className="client-avatar"
-                  style={{ backgroundColor: getPastelColor(index) }}
-                ></div>
-                <div className="client-details">
+                  style={{ background: getAvatar(index) }}
+                ></div> */}
+                <img src={getAvatar(index)} className="client-avatar" />
+                <div className="client-details pt-3 ps-2">
                   <span className="client-name">{client.name}</span>
                   <span className="client-email">{client.email}</span>
                 </div>

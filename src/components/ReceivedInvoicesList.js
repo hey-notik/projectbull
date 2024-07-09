@@ -12,6 +12,7 @@ const ReceivedInvoicesList = ({ invoices, onInvoiceClick }) => {
           key={invoice.id}
           className="invoice-item"
           onClick={() => onInvoiceClick(invoice)}
+          style={{ cursor: "pointer" }}
         >
           <div className="d-flex flex-col justify-content-between p-2">
             <div>Invoice #{invoice.invoiceNumber}</div>

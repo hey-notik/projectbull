@@ -24,7 +24,11 @@ const GeneratedInvoicesList = ({
     <div style={{ height: "33vh", overflowY: "scroll" }} className="pb-3">
       <ul className="list-unstyled">
         {invoices.map((invoice) => (
-          <li key={invoice.id} onClick={() => handleInvoiceClick(invoice)}>
+          <li
+            key={invoice.id}
+            onClick={() => handleInvoiceClick(invoice)}
+            style={{ cursor: "pointer" }}
+          >
             <div className="d-flex flex-col justify-content-between p-2">
               <div>Invoice #{invoice.invoiceNumber}</div>
               <div>Total: {invoice.total}</div>
