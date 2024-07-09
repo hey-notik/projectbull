@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import "./Form.css"; // Import the CSS for form styles
 import "./Overlay.css"; // Import the CSS for overlay styles
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const pastelColors = [
   "#FFB3BA",

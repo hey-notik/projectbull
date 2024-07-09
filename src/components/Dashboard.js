@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import InvoiceForm from "./InvoiceForm";
 import GeneratedInvoicesList from "./GeneratedInvoicesList";
 import ReceivedInvoicesList from "./ReceivedInvoicesList";
-import Overlay from "./Overlay";
 import InvoiceDetails from "./InvoiceDetails";
 import ReceivedInvoiceDetails from "./ReceivedInvoiceDetails";
 import { supabase } from "../supabaseClient";
@@ -66,7 +65,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mb-2 mt-4 my-2">
+    <div className="container mb-2 mt-5 my-2">
       <div className="row">
         <div className="col-md-6">
           <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
@@ -78,6 +77,9 @@ const Dashboard = () => {
               <GeneratedInvoicesList
                 invoices={generatedInvoices}
                 onInvoiceClick={handleInvoiceClick}
+                onInvoiceUpdated={handleInvoiceUpdated}
+                onInvoiceMarkedAsReceived={handleInvoiceMarkedAsReceived}
+                onInvoiceDeleted={handleInvoiceDeleted}
               />
             </div>
             <div className="col-md-12 border rounded-2 mt-2 mx-2 p-4">
@@ -88,23 +90,13 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <Overlay isOpen={overlayOpen} onClose={handleCloseOverlay}>
-            {selectedInvoice && isGenerated ? (
-              <InvoiceDetails
-                invoice={selectedInvoice}
-                onClose={handleCloseOverlay}
-                onUpdate={handleInvoiceUpdated}
-                onMarkAsReceived={handleInvoiceMarkedAsReceived}
-                onDelete={handleInvoiceDeleted}
-              />
-            ) : (
-              <ReceivedInvoiceDetails
-                invoice={selectedInvoice}
-                onClose={handleCloseOverlay}
-                onDelete={handleInvoiceDeleted}
-              />
-            )}
-          </Overlay>
+          (
+          <ReceivedInvoiceDetails
+            invoice={selectedInvoice}
+            onClose={handleCloseOverlay}
+            onDelete={handleInvoiceDeleted}
+          />
+          )
         </div>
       </div>
     </div>

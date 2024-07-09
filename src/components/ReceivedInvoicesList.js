@@ -1,6 +1,5 @@
 // src/components/ReceivedInvoicesList.js
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const ReceivedInvoicesList = ({ invoices, onInvoiceClick }) => {
   return (

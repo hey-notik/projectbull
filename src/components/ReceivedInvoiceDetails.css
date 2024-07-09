@@ -1,6 +1,4 @@
 /* Overlay Styles */
-.overlay,
-.invoice-details-overlay,
 .received-invoice-details-overlay {
   position: fixed;
   top: 0;
@@ -17,16 +15,12 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.overlay.open,
-.invoice-details-overlay.open,
 .received-invoice-details-overlay.open {
   opacity: 1;
   pointer-events: auto;
   padding-top: 75px;
 }
 
-.overlay-content,
-.invoice-details-content,
 .received-invoice-details-content {
   background: #111111; /* Dark background color */
   color: #f5f5f5; /* Light text color */
@@ -40,15 +34,14 @@
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   overflow-y: auto; /* Make the overlay scrollable */
+  font-size: smaller;
+  font-weight: 100;
 }
 
-.overlay.open .overlay-content,
-.invoice-details-overlay.open .invoice-details-content,
 .received-invoice-details-overlay.open .received-invoice-details-content {
   transform: translateX(0);
 }
 
-.close-button,
 .received-close-button {
   position: absolute;
   top: 10px;
@@ -62,7 +55,6 @@
 }
 
 /* Details Container */
-.details-container,
 .details-section {
   display: flex;
   justify-content: space-between;
@@ -71,9 +63,6 @@
   line-height: 1 rem;
 }
 
-.client-details,
-.company-details,
-.products,
 .details-column {
   margin-bottom: 20px;
   flex: 1; /* Make details containers flexible */
@@ -81,33 +70,23 @@
   font-weight: 200;
 }
 
-.client-details h3,
-.company-details h3,
-.products h3,
 .details-column h3 {
   margin-bottom: 10px;
   color: #ffffff;
 }
 
-.client-details p,
-.company-details p,
-.products p,
-.products table,
 .details-column p {
   margin-bottom: 10px;
   color: #f5f5f5;
 }
 
 /* Table Styles */
-.products table,
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.products table th,
-.products table td,
 table th,
 table td {
   border: 0.5px solid #ddd;
@@ -115,14 +94,12 @@ table td {
   text-align: left;
 }
 
-.products table th,
 table th {
   background-color: #333333;
   color: #f5f5f5;
 }
 
-.products table tr:nth-child(even),
-table tbody tr:nth-child(even) {
+table tr:nth-child(even) {
   background-color: #222222;
 }
 
@@ -130,30 +107,11 @@ table tbody tr:hover {
   background-color: #333333;
 }
 
-/* Input Styles */
-textarea,
-input[type="number"],
-select,
-input[type="text"],
-input[type="email"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #444444;
-  border-radius: 4px;
-  background-color: #222222; /* Dark background for inputs */
-  color: #f5f5f5; /* Light text color for inputs */
-}
-
-textarea {
-  height: 100px;
-}
-
 /* Grand Total */
 .grand-total {
   text-align: right;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: medium;
+  font-weight: medium;
 }
 
 .grand-total h3 {
@@ -180,13 +138,8 @@ button:hover {
   background-color: #03a996;
 }
 
-/* Error and Success Messages */
+/* Error Messages */
 .error {
   color: red;
-  font-weight: bold;
-}
-
-.success {
-  color: green;
   font-weight: bold;
 }

@@ -5,34 +5,37 @@
   align-items: center;
   padding: 1rem 2rem;
   background: rgba(0, 0, 0, 0.6); /* Frosted glass effect */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
+  backdrop-filter: blur(9px); /* Frosted glass effect */
   -webkit-backdrop-filter: blur(10px); /* Frosted glass effect for Safari */
   color: white;
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 1030; /* Ensures it stays on top of other content */
+  border-radius: 60px;
 }
 
 .navbar-logo {
-  height: 40px;
+  height: 60px;
 }
 
 .navbar-links {
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: smaller;
+  font-weight: 200;
 }
 
 .nav-link {
-  color: white;
+  color: rgb(216, 214, 214);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
   transition: color 0.3s ease;
 }
 
 .nav-link.active {
-  font-weight: bold;
+  font-weight: 600;
   color: #ffffff; /* Active link color */
 }
 
@@ -41,33 +44,6 @@
   text-decoration: underline;
 }
 
-.toggle-theme-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 25px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-left: 20px;
-}
-
-.toggle-theme-btn .icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #d7f9f7;
-  transition: transform 0.3s;
-}
-
-body.light .toggle-theme-btn .icon {
-  transform: translateX(0);
-  background-color: #000;
-}
-
-body.dark .toggle-theme-btn .icon {
-  transform: translateX(25px);
-  background-color: #fff;
+.w-100 {
+  width: 100%;
 }

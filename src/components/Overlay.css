@@ -1,7 +1,8 @@
-/* src/components/Overlay.css */
-
-.overlay {
-  position: fixed;
+/* Overlay Styles */
+.overlay,
+.invoice-details-overlay,
+.received-invoice-details-overlay {
+  position: flex;
   top: 0;
   right: 0;
   bottom: 0;
@@ -14,15 +15,18 @@
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
 }
 
-.overlay.open {
+.overlay.open,
+.invoice-details-overlay.open,
+.received-invoice-details-overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
 
-.overlay-content {
+.overlay-content,
+.invoice-details-content,
+.received-invoice-details-content {
   background: var(--background-color-light); /* Offwhite background */
   padding: 20px;
   border-radius: 8px 0 0 8px;
@@ -31,14 +35,17 @@
   height: 100%;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
+  overflow-y: auto; /* Make the overlay scrollable */
 }
 
-.overlay.open .overlay-content {
+.overlay.open .overlay-content,
+.invoice-details-overlay.open .invoice-details-content,
+.received-invoice-details-overlay.open .received-invoice-details-content {
   transform: translateX(0);
 }
 
-.close-button {
+.close-button,
+.received-close-button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -49,14 +56,11 @@
   background: transparent;
 }
 
-.overlay-content h3 {
-  font-family: "General Sans", sans-serif;
-}
-
+/* Form Elements */
 .overlay-content input,
 .overlay-content select,
 .overlay-content textarea {
-  width: calc(100% - 40px); /* Reduce width by 40px */
+  width: 100%;
   padding: 15px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -72,26 +76,38 @@
   outline: none;
 }
 
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+}
+
+/* Button Styles */
 .overlay-content button {
-  background: #0044cc; /* Dark blue color */
+  background: #03dac6; /* Dark blue color */
   color: #fff;
   cursor: pointer;
   transition: background 0.3s;
   border: none;
-  padding: 15px 0;
-  width: calc(100% - 40px); /* Reduce width by 60px */
+  padding: 10px 20px;
   font-size: 16px;
+  border-radius: px;
+  margin-right: 10px; /* Add margin to the right */
+}
+
+.overlay-content button:last-child {
+  margin-right: 0; /* Remove margin from the last button */
 }
 
 .overlay-content button:hover {
-  background: #0033aa; /* Darker blue on hover */
+  background: #03a996; /* Darker blue on hover */
 }
 
+/* Message Styles */
 .message {
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 4px;
-  animation: slideIn 0.3s forwards;
 }
 
 .message.success {

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import InvoiceDetails from "./InvoiceDetails";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const GeneratedInvoicesList = ({
   invoices,

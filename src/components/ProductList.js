@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductDetailsOverlay from "./ProductDetailsOverlay";
 import AddProductForm from "./AddProductForm";
-import "./Overlay.css";
+import "./Overlay.css"; // Import the CSS for overlay styles
 import { useProducts } from "../context/ProductsContext";
 
 const ProductList = () => {
@@ -21,10 +21,12 @@ const ProductList = () => {
 
   const handleProductUpdated = () => {
     refreshProducts(); // Refresh the product list
+    setOverlayOpen(false);
   };
 
   const handleProductDeleted = () => {
     refreshProducts(); // Refresh the product list
+    setOverlayOpen(false);
   };
 
   const handleProductAdded = () => {
@@ -53,6 +55,14 @@ const ProductList = () => {
           </ul>
         </div>
       </div>
+      {overlayOpen && selectedProduct && (
+        <ProductDetailsOverlay
+          product={selectedProduct}
+          onClose={handleCloseOverlay}
+          onUpdate={handleProductUpdated}
+          onDelete={handleProductDeleted}
+        />
+      )}
     </div>
   );
 };

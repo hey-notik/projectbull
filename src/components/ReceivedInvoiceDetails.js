@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import printInvoice from "./InvoicePrinter";
-import "./InvoiceDetails.css";
+import "./ReceivedInvoiceDetails.css";
 
 const ReceivedInvoiceDetails = ({ invoice, onClose, onDelete }) => {
   const [clientDetails, setClientDetails] = useState({});
@@ -80,8 +80,8 @@ const ReceivedInvoiceDetails = ({ invoice, onClose, onDelete }) => {
     printInvoice(invoiceData);
   };
 
-  if (!invoice) {
-    return <div>Loading...</div>;
+  if (!invoice || !clientDetails || !companyDetails) {
+    return null; // Render nothing if invoice or required details are not available
   }
 
   return (
@@ -159,9 +159,11 @@ const ReceivedInvoiceDetails = ({ invoice, onClose, onDelete }) => {
           </h3>
           <h3>Total: {invoice.total.toFixed(2)}</h3>
         </div>
-        <p>{invoice.customMessage}</p>
-        <button onClick={handlePrint}>Print</button>
-        <button onClick={handleDelete}>Delete</button>
+        <p>Custom Message: {invoice.customMessage}</p>
+        <div className="button-container">
+          <button onClick={handlePrint}>Print</button>
+          <button onClick={handleDelete}>Delete</button>
+        </div>
       </div>
     </div>
   );

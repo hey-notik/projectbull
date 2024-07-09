@@ -7,6 +7,11 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
 }
 
 .navbar {
@@ -41,11 +46,13 @@ body {
 .table {
   background-color: #222222; /* Dark mode table background color */
   color: #f5f5f5; /* Light text color for table */
+  border-radius: 5px;
 }
 
 .table th,
 .table td {
   border: 1px solid #444444; /* Dark mode border color for table */
+  border-radius: 5px;
 }
 
 textarea,
@@ -59,19 +66,18 @@ select {
 }
 
 button {
-  background-color: #333333; /* Dark mode button background color */
+  background-color: #03dac6; /* Dark mode button background color */
   color: #f5f5f5; /* Light text color for button */
-  border: 1px solid #444444; /* Dark mode border color for button */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #555555; /* Dark mode button hover color */
+  background-color: #03a996; /* Dark mode button hover color */
 }
 
 ::placeholder {
   font-family: "Merriweather", serif; /* Slab serif font for placeholders */
-  font-weight: 300;
-  font-size: small;
+  font-weight: 100;
+  font-size: smaller;
 }

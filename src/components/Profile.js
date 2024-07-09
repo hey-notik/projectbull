@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient"; // Add this line to import supabase
+import { supabase } from "../supabaseClient";
 import { useProfile } from "../context/ProfileContext";
+import InvoiceTemplate1 from "./InvoiceTemplate1";
+import InvoiceTemplate2 from "./InvoiceTemplate2";
+import InvoiceTemplate3 from "./InvoiceTemplate3";
 
 const Profile = () => {
   const { profile, refreshProfile } = useProfile();
   const [formData, setFormData] = useState(profile);
+  const [selectedTemplate, setSelectedTemplate] = useState("");
 
   useEffect(() => {
     setFormData(profile);
@@ -18,11 +22,16 @@ const Profile = () => {
     }));
   };
 
+  const handleTemplateChange = (e) => {
+    setSelectedTemplate(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const profileData = { ...formData, template: selectedTemplate };
     const { error } = await supabase
       .from("profiles")
-      .upsert(formData, { returning: "minimal" });
+      .upsert(profileData, { returning: "minimal" });
     if (error) {
       console.error("Error saving profile:", error.message);
     } else {
@@ -31,10 +40,32 @@ const Profile = () => {
     }
   };
 
+  const renderSelectedTemplate = () => {
+    const invoiceData = {
+      companyDetails: formData.companyDetails || {},
+      clientDetails: formData.clientDetails || {},
+      items: formData.items || [],
+    };
+
+    switch (selectedTemplate) {
+      case "InvoiceTemplate1":
+        return <InvoiceTemplate1 invoiceData={invoiceData} />;
+      case "InvoiceTemplate2":
+        return <InvoiceTemplate2 invoiceData={invoiceData} />;
+      case "InvoiceTemplate3":
+        return <InvoiceTemplate3 invoiceData={invoiceData} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="container-fluid m-5">
-      <div className="row">
-        <div className="col-5 border rounded-2 p-2" style={{ height: "80vh" }}>
+      <div className="row justify-content-center">
+        <div
+          className="col-md-6 col-lg-5 border rounded-2 p-4"
+          style={{ height: "80vh" }}
+        >
           <form onSubmit={handleSubmit} className="form">
             <h2 className="mb-5">Your Profile</h2>
             <label className="form-label fw-bold">Name</label>
@@ -69,20 +100,24 @@ const Profile = () => {
               onChange={handleChange}
             />
             <label className="form-label fw-bold mt-4">
-              Registered Company Name
+              Template Selection
             </label>
-            <input
+            <select
               className="form-control mb-4 w-100"
-              type="text"
-              name="company"
-              placeholder="Company"
-              value={formData.company}
-              onChange={handleChange}
-            />
+              name="template"
+              value={selectedTemplate}
+              onChange={handleTemplateChange}
+            >
+              <option value="">Select Template</option>
+              <option value="InvoiceTemplate1">Template 1</option>
+              <option value="InvoiceTemplate2">Template 2</option>
+              <option value="InvoiceTemplate3">Template 3</option>
+            </select>
             <button type="submit" className="btn btn-primary w-100 mt-5">
               Save
             </button>
           </form>
+          {renderSelectedTemplate()}
         </div>
       </div>
     </div>

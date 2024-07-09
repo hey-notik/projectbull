@@ -1,11 +1,12 @@
-/* src/components/Dashboard.css */
 @import url(../styles.css);
 
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  height: 80vh; /* Adjust height as needed */
+  width: 80vw; /* Adjust width as needed */
   padding: 20px;
   background-color: var(--background-color-light);
   font-weight: 300;
@@ -21,7 +22,7 @@
 
 .invoice-form-container,
 .lists-container {
-  width: 100%;
+  width: 100%; /* Adjust width as needed */
   margin-bottom: 20px;
 }
 
@@ -33,7 +34,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   overflow-y: auto;
-  font-size: small;
+  font-size: smaller;
   font-weight: 100;
 }
 
@@ -47,5 +48,9 @@
 }
 
 .card-border {
-  border: 0.5px solid var(#333);
+  border: 0.5px solid var(--border-color);
+}
+
+.mt-5 {
+  margin-top: 18rem !important; /* Override with !important to ensure it takes precedence */
 }
