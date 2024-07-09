@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import InvoiceForm from "./InvoiceForm";
 import GeneratedInvoicesList from "./GeneratedInvoicesList";
 import ReceivedInvoicesList from "./ReceivedInvoicesList";
-import Overlay from "./Overlay";
 import InvoiceDetails from "./InvoiceDetails";
 import ReceivedInvoiceDetails from "./ReceivedInvoiceDetails";
 import { supabase } from "../supabaseClient";
 import { useAuth } from "../context/AuthContext";
 import "./Dashboard.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Dashboard = () => {
   const [generatedInvoices, setGeneratedInvoices] = useState([]);
@@ -65,46 +65,38 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <div className="invoice-form-container">
-        <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
-      </div>
-      <div className="lists-container">
-        <div className="generated-list-container">
-          <h2>Generated Invoices</h2>
-          <GeneratedInvoicesList
-            invoices={generatedInvoices}
-            onInvoiceUpdated={handleInvoiceUpdated}
-            onInvoiceMarkedAsReceived={handleInvoiceMarkedAsReceived}
-            onInvoiceDeleted={handleInvoiceDeleted}
-            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, true)}
-          />
+    <div className="container-md mb-2 mt-5 my-2">
+      <div className="row">
+        <div className="col-6">
+          <InvoiceForm onInvoiceAdded={handleInvoiceAdded} />
         </div>
-        <div className="received-list-container">
-          <h2>Received Invoices</h2>
-          <ReceivedInvoicesList
-            invoices={receivedInvoices}
-            onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)}
-          />
-        </div>
-      </div>
-      <Overlay isOpen={overlayOpen} onClose={handleCloseOverlay}>
-        {selectedInvoice && isGenerated ? (
-          <InvoiceDetails
-            invoice={selectedInvoice}
-            onClose={handleCloseOverlay}
-            onUpdate={handleInvoiceUpdated}
-            onMarkAsReceived={handleInvoiceMarkedAsReceived}
-            onDelete={handleInvoiceDeleted}
-          />
-        ) : (
+        <div className="col-6">
+          <div className="row">
+            <div className="col-md-12 border rounded-2 p-4 mx-2 mb-2">
+              <h2 className="mb-2">Generated Invoices</h2>
+              <GeneratedInvoicesList
+                invoices={generatedInvoices}
+                onInvoiceClick={handleInvoiceClick}
+                onInvoiceUpdated={handleInvoiceUpdated}
+                onInvoiceMarkedAsReceived={handleInvoiceMarkedAsReceived}
+                onInvoiceDeleted={handleInvoiceDeleted}
+              />
+            </div>
+            <div className="col-md-12 border rounded-2 mt-2 mx-2 p-4">
+              <h2 className="mb-2">Received Invoices</h2>
+              <ReceivedInvoicesList
+                invoices={receivedInvoices}
+                onInvoiceClick={(invoice) => handleInvoiceClick(invoice, false)}
+              />
+            </div>
+          </div>
           <ReceivedInvoiceDetails
             invoice={selectedInvoice}
             onClose={handleCloseOverlay}
             onDelete={handleInvoiceDeleted}
           />
-        )}
-      </Overlay>
+        </div>
+      </div>
     </div>
   );
 };

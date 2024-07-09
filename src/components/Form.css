@@ -1,12 +1,12 @@
 /* src/components/Form.css */
-@import url("https://fonts.googleapis.com/css2?family=General+Sans:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=General+Sans:wght@200;400;600&display=swap");
 
 body {
   font-family: "General Sans", sans-serif;
 }
 
 .form-container {
-  width: calc(50% - 10px);
+  width: calc(50% - 20px);
   padding: 20px;
 }
 
@@ -40,7 +40,7 @@ body {
 }
 
 .form button {
-  background: #0044cc; /* Dark blue color */
+  background: #03dac6; /* Dark blue color */
   color: #fff;
   cursor: pointer;
   transition: background 0.3s;
@@ -51,7 +51,7 @@ body {
 }
 
 .form button:hover {
-  background: #0033aa; /* Darker blue on hover */
+  background: #03a996; /* Darker blue on hover */
 }
 
 .message {

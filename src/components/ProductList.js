@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductDetailsOverlay from "./ProductDetailsOverlay";
 import AddProductForm from "./AddProductForm";
-import "./Overlay.css";
+import "./Overlay.css"; // Import the CSS for overlay styles
 import { useProducts } from "../context/ProductsContext";
 
 const ProductList = () => {
@@ -21,10 +21,12 @@ const ProductList = () => {
 
   const handleProductUpdated = () => {
     refreshProducts(); // Refresh the product list
+    setOverlayOpen(false);
   };
 
   const handleProductDeleted = () => {
     refreshProducts(); // Refresh the product list
+    setOverlayOpen(false);
   };
 
   const handleProductAdded = () => {
@@ -32,30 +34,39 @@ const ProductList = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <AddProductForm onProductAdded={handleProductAdded} />
-      </div>
-      <div className="list-container">
-        <div className="list">
+    <div className="container-fluid m-5">
+      <div className="row d-flex flex-row gap-5">
+        <div
+          className="col-5 p-3 ms-5 mb-5 border rounded-2"
+          style={{ height: "auto" }}
+        >
+          <AddProductForm onProductAdded={handleProductAdded} />
+        </div>
+        <div className="col-5 p-3 border rounded-2" style={{ height: "85vh" }}>
           <h2>Your Products</h2>
-          <ul>
+          <ul className="list-unstyled">
             {products.map((product) => (
-              <li key={product.id} onClick={() => handleProductClick(product)}>
-                {product.name}
+              <li
+                className="p-2"
+                key={product.id}
+                onClick={() => handleProductClick(product)}
+                style={{ cursor: "pointer" }}
+              >
+                <p className="ms-2">{product.name}</p>
+                <hr />
               </li>
             ))}
           </ul>
         </div>
-        {selectedProduct && (
-          <ProductDetailsOverlay
-            product={selectedProduct}
-            onClose={handleCloseOverlay}
-            onUpdate={handleProductUpdated}
-            onDelete={handleProductDeleted}
-          />
-        )}
       </div>
+      {overlayOpen && selectedProduct && (
+        <ProductDetailsOverlay
+          product={selectedProduct}
+          onClose={handleCloseOverlay}
+          onUpdate={handleProductUpdated}
+          onDelete={handleProductDeleted}
+        />
+      )}
     </div>
   );
 };

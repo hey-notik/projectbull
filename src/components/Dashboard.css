@@ -1,15 +1,28 @@
-/* src/components/Dashboard.css */
+@import url(../styles.css);
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  height: 80vh; /* Adjust height as needed */
+  width: 80vw; /* Adjust width as needed */
   padding: 20px;
   background-color: var(--background-color-light);
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.dashboard-container h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
 }
 
 .invoice-form-container,
 .lists-container {
-  width: 100%;
+  width: 100%; /* Adjust width as needed */
   margin-bottom: 20px;
 }
 
@@ -21,9 +34,19 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   overflow-y: auto;
+  font-size: smaller;
+  font-weight: 100;
 }
 
 .generated-list-container,
 .received-list-container {
   margin-top: 20px;
+}
+
+.paddingRemove {
+  padding: 0;
+}
+
+.card-border {
+  border: 0.5px solid var(--border-color);
 }
