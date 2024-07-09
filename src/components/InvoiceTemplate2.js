@@ -80,11 +80,13 @@ const InvoiceTemplate2 = ({ invoiceData }) => {
             <tr key={index}>
               <td style={styles.thTd}>{index + 1}</td>
               <td style={styles.thTd}>{item.name}</td>
-              <td style={styles.thTd}>{item.price.toFixed(2)}</td>
+              <td style={styles.thTd}>{item.price?.toFixed(2)}</td>
               <td style={styles.thTd}>{item.quantity}</td>
-              <td style={styles.thTd}>{item.tax.toFixed(2)}%</td>
+              <td style={styles.thTd}>{item.tax?.toFixed(2)}%</td>
               <td style={styles.thTd}>
-                {(item.price * item.quantity * (1 + item.tax / 100)).toFixed(2)}
+                {(item.price * item.quantity * (1 + item.tax / 100))?.toFixed(
+                  2
+                )}
               </td>
             </tr>
           ))}
@@ -95,7 +97,7 @@ const InvoiceTemplate2 = ({ invoiceData }) => {
           Sub Total:{" "}
           {invoiceData.items
             .reduce((acc, item) => acc + item.price * item.quantity, 0)
-            .toFixed(2)}
+            ?.toFixed(2)}
         </p>
         <p>
           Tax:{" "}
@@ -105,9 +107,9 @@ const InvoiceTemplate2 = ({ invoiceData }) => {
                 acc + (item.price * item.quantity * item.tax) / 100,
               0
             )
-            .toFixed(2)}
+            ?.toFixed(2)}
         </p>
-        <p>Total: {invoiceData.total.toFixed(2)}</p>
+        <p>Total: {invoiceData.total?.toFixed(2)}</p>
       </div>
       <div style={styles.customMessage}>
         <p>{invoiceData.customMessage}</p>

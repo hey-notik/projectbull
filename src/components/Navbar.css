@@ -12,7 +12,6 @@
   top: 0;
   width: 100%;
   z-index: 1030; /* Ensures it stays on top of other content */
-  border-radius: 60px;
 }
 
 .navbar-logo {
